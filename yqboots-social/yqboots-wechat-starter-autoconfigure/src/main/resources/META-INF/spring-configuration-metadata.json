@@ -1,0 +1,31 @@
+{
+  "hints": [
+    {
+      "name": "yqboots.social.wechat.auth.scope",
+      "values": [
+        {
+          "value": "snsapi_userinfo"
+        }
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties",
+      "name": "WeChat Properties",
+      "type": "com.yqboots.social.wechat.WeChatProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties",
+      "name": "yqboots.social.wechat.app-id",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties",
+      "name": "yqboots.social.wechat.app-secret",
+      "type": "java.lang.String"
+    }
+  ]
+}
