@@ -6,6 +6,7 @@ import com.yqboots.social.wechat.api.pay.FeeType;
 import com.yqboots.social.wechat.api.pay.LimitPay;
 import com.yqboots.social.wechat.api.pay.SignType;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.hibernate.validator.constraints.Length;
 
@@ -41,7 +42,8 @@ import static com.yqboots.social.wechat.constants.WeChatConstants.*;
  * </pre></code>
  */
 @Data
-@XmlRootElement(name = "xml")
+@NoArgsConstructor
+@XmlRootElement(name = FIELD_ROOT_ELEMENT)
 @XmlAccessorType(XmlAccessType.FIELD)
 public class UnifiedOrderRequest implements Serializable {
     /**

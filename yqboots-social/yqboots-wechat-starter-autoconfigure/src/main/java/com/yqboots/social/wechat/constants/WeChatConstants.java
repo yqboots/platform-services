@@ -31,6 +31,7 @@ public final class WeChatConstants {
     public static final String PACKAGE = "Sign=WXPay";
 
     // FIELDS
+    public static final String FIELD_ROOT_ELEMENT = "xml";
     public static final String FIELD_APPID = "appid";
     public static final String FIELD_ATTACH = "attach";
     public static final String FIELD_BANK_TYPE = "bank_type";
@@ -57,6 +58,8 @@ public final class WeChatConstants {
     public static final String FIELD_PREPAY_ID = "prepay_id";
     public static final String FIELD_RECEIPT = "receipt";
     public static final String FIELD_RESULT_CODE = "result_code";
+    public static final String FIELD_RETURN_CODE = "return_code";
+    public static final String FIELD_RETURN_MSG = "return_msg";
     public static final String FIELD_SETTLEMENT_TOTAL_FEE = "settlement_total_fee";
     public static final String FIELD_SIGN = "sign";
     public static final String FIELD_SIGN_TYPE = "sign_type";

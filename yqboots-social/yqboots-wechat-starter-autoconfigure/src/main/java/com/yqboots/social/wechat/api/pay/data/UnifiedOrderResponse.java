@@ -5,6 +5,7 @@ import com.yqboots.social.wechat.api.annotation.MerchantId;
 import com.yqboots.social.wechat.api.annotation.NonceStr;
 import com.yqboots.social.wechat.api.annotation.Sign;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.hibernate.validator.constraints.Length;
 
@@ -21,7 +22,8 @@ import static com.yqboots.social.wechat.constants.WeChatConstants.*;
  * @version 1.0.0
  */
 @Data
-@XmlRootElement(name = "xml")
+@NoArgsConstructor
+@XmlRootElement(name = FIELD_ROOT_ELEMENT)
 @XmlAccessorType(XmlAccessType.FIELD)
 public class UnifiedOrderResponse implements Serializable {
     /**

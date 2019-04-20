@@ -3,6 +3,7 @@ package com.yqboots.social.wechat.api.pay.data;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.yqboots.social.wechat.api.annotation.AppId;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.hibernate.validator.constraints.Length;
 
@@ -20,6 +21,7 @@ import static com.yqboots.social.wechat.constants.WeChatConstants.*;
  * </ul>
  */
 @Data
+@NoArgsConstructor
 public class InitiatePaymentRequest {
     @AppId
     @JsonProperty(FIELD_APPID)

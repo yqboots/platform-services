@@ -2,6 +2,7 @@ package com.yqboots.social.wechat.api.pay.data;
 
 import com.yqboots.social.wechat.api.annotation.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -21,7 +22,8 @@ import static com.yqboots.social.wechat.constants.WeChatConstants.*;
  * </ul>
  */
 @Data
-@XmlRootElement(name = "xml")
+@NoArgsConstructor
+@XmlRootElement(name = FIELD_ROOT_ELEMENT)
 @XmlAccessorType(XmlAccessType.FIELD)
 public class OrderQueryRequest {
     /**
