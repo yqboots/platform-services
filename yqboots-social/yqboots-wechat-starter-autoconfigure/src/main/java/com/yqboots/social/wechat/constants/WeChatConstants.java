@@ -29,4 +29,45 @@ public final class WeChatConstants {
 
     public static final String DEFAULT_DEVICE_INFO = "WEB";
     public static final String PACKAGE = "Sign=WXPay";
+
+    // FIELDS
+    public static final String FIELD_APPID = "appid";
+    public static final String FIELD_ATTACH = "attach";
+    public static final String FIELD_BANK_TYPE = "bank_type";
+    public static final String FIELD_BODY = "body";
+    public static final String FIELD_CASH_FEE = "cash_fee";
+    public static final String FIELD_CASH_FEE_TYPE = "cash_fee_type";
+    public static final String FIELD_COUPON_COUNT = "coupon_count";
+    public static final String FIELD_COUPON_FEE = "coupon_fee";
+    public static final String FIELD_DETAIL = "detail";
+    public static final String FIELD_DEVICE_INFO = "device_info";
+    public static final String FIELD_ERROR_CODE = "err_code";
+    public static final String FIELD_ERROR_CODE_DESCRIPTION = "err_code_des";
+    public static final String FIELD_FEE_TYPE = "fee_type";
+    public static final String FIELD_GOODS_TAG = "goods_tag";
+    public static final String FIELD_IS_SUBSCRIBE = "is_subscribe";
+    public static final String FIELD_LIMIT_PAY = "limit_pay";
+    public static final String FIELD_MERCHANT_ID = "mch_id";
+    public static final String FIELD_NONCE_STR = "nonce_str";
+    public static final String FIELD_NOTIFY_URL = "notify_url";
+    public static final String FIELD_OPEN_ID = "openid";
+    public static final String FIELD_OUT_TRADE_NO = "out_trade_no";
+    public static final String FIELD_PACKAGE = "package";
+    public static final String FIELD_PARTNER_ID = "partnerid";
+    public static final String FIELD_PREPAY_ID = "prepay_id";
+    public static final String FIELD_RECEIPT = "receipt";
+    public static final String FIELD_RESULT_CODE = "result_code";
+    public static final String FIELD_SETTLEMENT_TOTAL_FEE = "settlement_total_fee";
+    public static final String FIELD_SIGN = "sign";
+    public static final String FIELD_SIGN_TYPE = "sign_type";
+    public static final String FIELD_SPBILL_CREATE_IP = "spbill_create_ip";
+    public static final String FIELD_TIME_END = "time_end";
+    public static final String FIELD_TIME_EXPIRE = "time_expire";
+    public static final String FIELD_TIME_START = "time_start";
+    public static final String FIELD_TIMESTAMP = "timestamp";
+    public static final String FIELD_TOTAL_FEE = "total_fee";
+    public static final String FIELD_TRADE_STATE = "trade_state";
+    public static final String FIELD_TRADE_STATE_DESCRIPTION = "trade_state_desc";
+    public static final String FIELD_TRADE_TYPE = "trade_type";
+    public static final String FIELD_TRANSACTION_ID = "transaction_id";
 }

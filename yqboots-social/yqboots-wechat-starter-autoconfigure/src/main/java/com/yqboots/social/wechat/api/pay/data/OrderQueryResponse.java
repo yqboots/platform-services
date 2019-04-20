@@ -1,5 +1,6 @@
 package com.yqboots.social.wechat.api.pay.data;
 
+import com.yqboots.social.wechat.api.annotation.*;
 import com.yqboots.social.wechat.api.pay.FeeType;
 import com.yqboots.social.wechat.constants.WeChatConstants;
 import lombok.Data;
@@ -14,6 +15,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
+import static com.yqboots.social.wechat.constants.WeChatConstants.*;
+
 /**
  * 查询订单返回报文
  *
@@ -27,18 +30,14 @@ public class OrderQueryResponse {
     /**
      * 应用ID
      */
-    @NonNull
-    @NotEmpty
-    @Length(max = 32)
-    @XmlElement(name = "appid")
+    @AppId
+    @XmlElement(name = FIELD_APPID)
     private String appId;
     /**
      * 商户号
      */
-    @NonNull
-    @NotEmpty
-    @Length(max = 32)
-    @XmlElement(name = "mch_id")
+    @MerchantId
+    @XmlElement(name = FIELD_MERCHANT_ID)
     private String mchId;
     /**
      * 随机字符串
@@ -46,42 +45,40 @@ public class OrderQueryResponse {
     @NonNull
     @NotEmpty
     @Length(max = 32)
-    @XmlElement(name = "nonce_str")
+    @XmlElement(name = FIELD_NONCE_STR)
     private String nonceStr;
     /**
      * 签名
      */
-    @NonNull
-    @NotEmpty
-    @Length(max = 32)
-    @XmlElement(name = "sign")
+    @Sign
+    @XmlElement(name = FIELD_SIGN)
     private String sign;
 
     /**
      * 业务结果 - SUCCESS/FAIL
      */
     @Length(max = 16)
-    @XmlElement(name = "result_code")
+    @XmlElement(name = FIELD_RESULT_CODE)
     private String resultCode;
 
     /**
      * 错误代码
      */
     @Length(max = 32)
-    @XmlElement(name = "err_code")
+    @XmlElement(name = FIELD_ERROR_CODE)
     private String errCode;
     /**
      * 错误代码描述
      */
     @Length(max = 128)
-    @XmlElement(name = "err_code_des")
+    @XmlElement(name = FIELD_ERROR_CODE_DESCRIPTION)
     private String errCodeDes;
 
     /**
      * 设备号 - 终端设备号(门店号或收银设备ID)，默认请传"WEB"
      */
     @Length(max = 32)
-    @XmlElement(name = "device_info")
+    @XmlElement(name = FIELD_DEVICE_INFO)
     private String deviceInfo = WeChatConstants.DEFAULT_DEVICE_INFO;
 
     /**
@@ -90,7 +87,7 @@ public class OrderQueryResponse {
     @NonNull
     @NotEmpty
     @Length(max = 128)
-    @XmlElement(name = "openid")
+    @XmlElement(name = FIELD_OPEN_ID)
     private String openId;
 
     /**
@@ -99,7 +96,7 @@ public class OrderQueryResponse {
     @NonNull
     @NotEmpty
     @Length(max = 1)
-    @XmlElement(name = "is_subscribe")
+    @XmlElement(name = FIELD_IS_SUBSCRIBE)
     private String isSubscribe;
 
     /**
@@ -108,7 +105,7 @@ public class OrderQueryResponse {
     @NonNull
     @NotEmpty
     @Length(max = 16)
-    @XmlElement(name = "trade_type")
+    @XmlElement(name = FIELD_TRADE_TYPE)
     private String tradeType;
     /**
      * 交易状态
@@ -116,7 +113,7 @@ public class OrderQueryResponse {
     @NonNull
     @NotEmpty
     @Length(max = 32)
-    @XmlElement(name = "trade_state")
+    @XmlElement(name = FIELD_TRADE_STATE)
     private String tradeState;
 
     /**
@@ -125,53 +122,53 @@ public class OrderQueryResponse {
     @NonNull
     @NotEmpty
     @Length(max = 16)
-    @XmlElement(name = "bank_type")
+    @XmlElement(name = FIELD_BANK_TYPE)
     private String bankType;
     /**
      * 总金额
      */
     @NonNull
     @NotNull
-    @XmlElement(name = "total_fee")
+    @XmlElement(name = FIELD_TOTAL_FEE)
     private Integer totalFee;
     /**
      * 货币类型 - 符合ISO 4217标准的三位字母代码，默认人民币CNY
      */
     @Length(max = 16)
-    @XmlElement(name = "fee_type")
+    @XmlElement(name = FIELD_FEE_TYPE)
     private String feeType = FeeType.CNY.name();
     /**
      * 现金支付金额
      */
     @NonNull
     @NotNull
-    @XmlElement(name = "cash_fee")
+    @XmlElement(name = FIELD_CASH_FEE)
     private Integer cashFee;
     /**
      * 现金支付货币类型
      */
     @Length(max = 16)
-    @XmlElement(name = "cash_fee_type")
+    @XmlElement(name = FIELD_CASH_FEE_TYPE)
     private String cashFeeType;
 
     /**
      * 应结订单金额
      */
-    @XmlElement(name = "settlement_total_fee")
+    @XmlElement(name = FIELD_SETTLEMENT_TOTAL_FEE)
     private Integer settlementTotalFee;
 
     /**
      * 代金券金额
      */
     @Length(max = 1)
-    @XmlElement(name = "coupon_fee")
+    @XmlElement(name = FIELD_COUPON_FEE)
     private Integer couponFee;
 
     /**
      * 代金券使用数量
      */
     @Length(max = 1)
-    @XmlElement(name = "coupon_count")
+    @XmlElement(name = FIELD_COUPON_COUNT)
     private Integer couponCount;
 
     /**
@@ -193,24 +190,20 @@ public class OrderQueryResponse {
     /**
      * 微信支付订单号
      */
-    @NonNull
-    @NotEmpty
-    @Length(max = 32)
-    @XmlElement(name = "transaction_id")
+    @TransactionId
+    @XmlElement(name = FIELD_TRANSACTION_ID)
     private String transactionId;
     /**
      * 商户订单号，商户系统内部订单号，要求32个字符内，只能是数字、大小写字母_-|*@ ，且在同一个商户号下唯一
      */
-    @NonNull
-    @NotEmpty
-    @Length(max = 32)
-    @XmlElement(name = "out_trade_no")
+    @OutTradeNo
+    @XmlElement(name = FIELD_OUT_TRADE_NO)
     private String outTradeNo;
     /**
      * 附加数据
      */
     @Length(max = 128)
-    @XmlElement(name = "attach")
+    @XmlElement(name = FIELD_ATTACH)
     private String attach;
     /**
      * 支付完成时间，支付完成时间，格式为yyyyMMddHHmmss
@@ -218,9 +211,10 @@ public class OrderQueryResponse {
     @NonNull
     @NotEmpty
     @Length(max = 14)
-    @XmlElement(name = "time_end")
+    @XmlElement(name = FIELD_TIME_END)
     private String timeEnd;
+
     @Length(max = 256)
-    @XmlElement(name = "trade_state_desc")
+    @XmlElement(name = FIELD_TRADE_STATE_DESCRIPTION)
     private String tradeStateDesc;
 }

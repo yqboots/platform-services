@@ -1,12 +1,14 @@
 package com.yqboots.social.wechat.api.pay.data;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.yqboots.social.wechat.constants.WeChatConstants;
+import com.yqboots.social.wechat.api.annotation.AppId;
 import lombok.Data;
 import lombok.NonNull;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
+
+import static com.yqboots.social.wechat.constants.WeChatConstants.*;
 
 /**
  * <h3><a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_12&index=2">调起支付接口</a></h3>
@@ -19,15 +21,13 @@ import javax.validation.constraints.NotEmpty;
  */
 @Data
 public class InitiatePaymentRequest {
-    @NonNull
-    @NotEmpty
-    @Length(max = 32)
-    @JsonProperty("appid")
+    @AppId
+    @JsonProperty(FIELD_APPID)
     private String appId;
     @NonNull
     @NotEmpty
     @Length(max = 32)
-    @JsonProperty("partnerid")
+    @JsonProperty(FIELD_PARTNER_ID)
     private String partnerId;
     @NonNull
     @NotEmpty
@@ -37,21 +37,21 @@ public class InitiatePaymentRequest {
     @NonNull
     @NotEmpty
     @Length(max = 128)
-    @JsonProperty("package")
-    private String pkg = WeChatConstants.PACKAGE;
+    @JsonProperty(FIELD_PACKAGE)
+    private String pkg = PACKAGE;
     @NonNull
     @NotEmpty
     @Length(max = 32)
-    @JsonProperty("noncestr")
+    @JsonProperty(FIELD_NONCE_STR)
     private String nonceStr;
     @NonNull
     @NotEmpty
     @Length(max = 10)
-    @JsonProperty("timestamp")
+    @JsonProperty(FIELD_TIMESTAMP)
     private String timestamp;
     @NonNull
     @NotEmpty
     @Length(max = 32)
-    @JsonProperty("sign")
+    @JsonProperty(FIELD_SIGN)
     private String sign;
 }

@@ -1,15 +1,14 @@
 package com.yqboots.social.wechat.api.pay.data;
 
-import com.yqboots.social.wechat.constants.WeChatConstants;
+import com.yqboots.social.wechat.api.annotation.*;
 import lombok.Data;
-import lombok.NonNull;
-import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotEmpty;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import static com.yqboots.social.wechat.constants.WeChatConstants.*;
 
 /**
  * <h3><a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_2&index=4">查询订单</a></h3>
@@ -28,50 +27,43 @@ public class OrderQueryRequest {
     /**
      * 应用ID
      */
-    @NonNull
-    @NotEmpty
-    @Length(max = 32)
-    @XmlElement(name = "appid")
+    @AppId
+    @XmlElement(name = FIELD_APPID)
     private String appId;
+
     /**
      * 商户号
      */
-    @NonNull
-    @NotEmpty
-    @Length(max = 32)
-    @XmlElement(name = "mch_id")
+    @MerchantId
+    @XmlElement(name = FIELD_MERCHANT_ID)
     private String mchId;
+
     /**
      * 微信支付订单号, 微信的订单号，优先使用
      */
-    @NonNull
-    @NotEmpty
-    @Length(max = 32)
-    @XmlElement(name = "transaction_id")
+    @TransactionId
+    @XmlElement(name = FIELD_TRANSACTION_ID)
     private String transactionId;
+
     /**
      * 商户订单号 - 商户系统内部订单号，要求32个字符内，只能是数字、大小写字母_-|*且在同一个商户号下唯一
      * <br/>商户系统内部的订单号，当没提供transaction_id时需要传这个
      */
-    @NonNull
-    @NotEmpty
-    @Length(max = 32)
-    @XmlElement(name = "out_trade_no")
+    @OutTradeNo
+    @XmlElement(name = FIELD_OUT_TRADE_NO)
     private String outTradeNo;
+
     /**
      * 随机字符串
      */
-    @NonNull
-    @NotEmpty
-    @Length(max = 32)
-    @XmlElement(name = "nonce_str")
+    @NonceStr
+    @XmlElement(name = FIELD_NONCE_STR)
     private String nonceStr;
+
     /**
      * 签名
      */
-    @NonNull
-    @NotEmpty
-    @Length(max = 32)
-    @XmlElement(name = "sign")
+    @Sign
+    @XmlElement(name = FIELD_SIGN)
     private String sign;
 }

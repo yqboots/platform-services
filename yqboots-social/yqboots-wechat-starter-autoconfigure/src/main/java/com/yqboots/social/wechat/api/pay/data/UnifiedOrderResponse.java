@@ -1,5 +1,9 @@
 package com.yqboots.social.wechat.api.pay.data;
 
+import com.yqboots.social.wechat.api.annotation.AppId;
+import com.yqboots.social.wechat.api.annotation.MerchantId;
+import com.yqboots.social.wechat.api.annotation.NonceStr;
+import com.yqboots.social.wechat.api.annotation.Sign;
 import lombok.Data;
 import lombok.NonNull;
 import org.hibernate.validator.constraints.Length;
@@ -7,6 +11,8 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.NotEmpty;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+
+import static com.yqboots.social.wechat.constants.WeChatConstants.*;
 
 /**
  * 下单返回报文
@@ -55,52 +61,44 @@ public class UnifiedOrderResponse implements Serializable {
     /**
      * 应用ID
      */
-    @NonNull
-    @NotEmpty
-    @Length(max = 32)
-    @XmlElement(name = "appid")
+    @AppId
+    @XmlElement(name = FIELD_APPID)
     private String appId;
     /**
      * 商户号
      */
-    @NonNull
-    @NotEmpty
-    @Length(max = 32)
-    @XmlElement(name = "mch_id")
+    @MerchantId
+    @XmlElement(name = FIELD_MERCHANT_ID)
     private String mchId;
     /**
      * 设备号 - 终端设备号(门店号或收银设备ID)，默认请传"WEB"
      */
     @Length(max = 32)
-    @XmlElement(name = "device_info")
-    private String deviceInfo = "WEB";
+    @XmlElement(name = FIELD_DEVICE_INFO)
+    private String deviceInfo = DEFAULT_DEVICE_INFO;
     /**
      * 随机字符串
      */
-    @NonNull
-    @NotEmpty
-    @Length(max = 32)
-    @XmlElement(name = "nonce_str")
+    @NonceStr
+    @XmlElement(name = FIELD_NONCE_STR)
     private String nonceStr;
     /**
      * 签名
      */
-    @NonNull
-    @NotEmpty
-    @Length(max = 32)
-    @XmlElement(name = "sign")
+    @Sign
+    @XmlElement(name = FIELD_SIGN)
     private String sign;
 
     /**
      * 交易类型 - 调用接口提交的交易类型，取值如下：JSAPI，NATIVE，APP
      */
     @Length(max = 16)
-    @XmlElement(name = "trade_type")
+    @XmlElement(name = FIELD_TRADE_TYPE)
     private String tradeType;
     /**
      * 预支付交易会话标识 - 微信生成的预支付回话标识，用于后续接口调用中使用，该值有效期为2小时
      */
     @Length(max = 64)
-    @XmlElement(name = "prepay_id")
+    @XmlElement(name = FIELD_PREPAY_ID)
     private String prepayId;
 }
