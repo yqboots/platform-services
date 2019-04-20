@@ -17,4 +17,5 @@ public final class WeChatConstants {
     public static final String RESULT_CODE_FAIL = FAIL;
 
     public static final String DEFAULT_DEVICE_INF0 = "WEB";
+    public static final String PACKAGE = "Sign=WXPay";
 }

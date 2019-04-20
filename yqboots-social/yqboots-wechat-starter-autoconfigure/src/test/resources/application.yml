@@ -1,0 +1,10 @@
+yqboots:
+  social:
+    wechat:
+      app-id: 123
+      app-secret: 123
+      partner-id: 123
+      partner-key: 123
+      pay:
+        unified-order-url: https://api.mch.weixin.qq.com/pay/unifiedorder
+        order-query-url: https://api.mch.weixin.qq.com/pay/orderquery

@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
- * <h3>统一下单请求报文（XML格式）</h3>
+ * <h3><a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_1">统一下单请求报文</a>（XML格式）</h3>
  * <p>商户系统先调用该接口在微信支付服务后台生成预支付交易单，返回正确的预支付交易会话标识后再在APP里面调起支付。</p>
  * <p>URL地址: https://api.mch.weixin.qq.com/pay/unifiedorder</p>
  * <p>示例如下：</p>
@@ -39,7 +39,7 @@ import java.io.Serializable;
  */
 @Data
 @XmlRootElement(name = "xml")
-@XmlAccessorType(XmlAccessType.PROPERTY)
+@XmlAccessorType(XmlAccessType.FIELD)
 public class UnifiedOrderRequest implements Serializable {
     /**
      * 应用ID

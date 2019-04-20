@@ -16,4 +16,11 @@ public class WeChatProperties {
     private String appSecret;
     private String partnerId;
     private String partnerKey;
+    private PayProperties pay;
+
+    @Data
+    public static class PayProperties {
+        private String unifiedOrderUrl;
+        private String orderQueryUrl;
+    }
 }
