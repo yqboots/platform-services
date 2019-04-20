@@ -22,5 +22,11 @@ public class WeChatProperties {
     public static class PayProperties {
         private String unifiedOrderUrl;
         private String orderQueryUrl;
+        private String closeOrderUrl;
+        private String refundUrl;
+        private String refundQueryUrl;
+        private String downloadFundFlowUrl;
+        private String reportUrl;
+        private String batchQueryCommentUrl;
     }
 }

@@ -1,7 +1,7 @@
 package com.yqboots.social.wechat.api.pay.data;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.yqboots.social.wechat.WeChatConstants;
+import com.yqboots.social.wechat.constants.WeChatConstants;
 import lombok.Data;
 import lombok.NonNull;
 import org.hibernate.validator.constraints.Length;

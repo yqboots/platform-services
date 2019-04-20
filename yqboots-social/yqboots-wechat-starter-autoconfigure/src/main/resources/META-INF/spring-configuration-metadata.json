@@ -46,6 +46,41 @@
       "sourceType": "com.yqboots.social.wechat.WeChatProperties",
       "name": "yqboots.social.wechat.pay.order-query-url",
       "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties",
+      "name": "yqboots.social.wechat.pay.close-order-url",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties",
+      "name": "yqboots.social.wechat.pay.refund-url",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties",
+      "name": "yqboots.social.wechat.pay.refund-query-url",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties",
+      "name": "yqboots.social.wechat.pay.download-bill-url",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties",
+      "name": "yqboots.social.wechat.pay.download-fund-flow-url",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties",
+      "name": "yqboots.social.wechat.pay.report-url",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties",
+      "name": "yqboots.social.wechat.pay.batch-query-comment-url",
+      "type": "java.lang.String"
     }
   ]
 }

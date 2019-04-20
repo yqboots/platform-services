@@ -1,6 +1,6 @@
 package com.yqboots.social.wechat.api.pay.data;
 
-import com.yqboots.social.wechat.WeChatConstants;
+import com.yqboots.social.wechat.constants.WeChatConstants;
 import com.yqboots.social.wechat.api.pay.FeeType;
 import com.yqboots.social.wechat.api.pay.LimitPay;
 import com.yqboots.social.wechat.api.pay.SignType;
@@ -62,7 +62,7 @@ public class UnifiedOrderRequest implements Serializable {
      */
     @Length(max = 32)
     @XmlElement(name = "device_info")
-    private String deviceInfo = WeChatConstants.DEFAULT_DEVICE_INF0;
+    private String deviceInfo = WeChatConstants.DEFAULT_DEVICE_INFO;
     /**
      * 随机字符串
      */
@@ -102,7 +102,7 @@ public class UnifiedOrderRequest implements Serializable {
     /**
      * 附加数据
      */
-    @Length(max = 127)
+    @Length(max = 128)
     @XmlElement(name = "attach")
     private String attach;
     /**
