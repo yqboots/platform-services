@@ -10,6 +10,10 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
 /**
@@ -34,6 +38,8 @@ import java.io.Serializable;
  * </pre></code>
  */
 @Data
+@XmlRootElement(name = "xml")
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class UnifiedOrderRequest implements Serializable {
     /**
      * 应用ID
@@ -41,6 +47,7 @@ public class UnifiedOrderRequest implements Serializable {
     @NonNull
     @NotEmpty
     @Length(max = 32)
+    @XmlElement(name = "appid")
     private String appId;
     /**
      * 商户号
@@ -48,11 +55,13 @@ public class UnifiedOrderRequest implements Serializable {
     @NonNull
     @NotEmpty
     @Length(max = 32)
+    @XmlElement(name = "mch_id")
     private String mchId;
     /**
      * 设备号 - 终端设备号(门店号或收银设备ID)，默认请传"WEB"
      */
     @Length(max = 32)
+    @XmlElement(name = "device_info")
     private String deviceInfo = WeChatConstants.DEFAULT_DEVICE_INF0;
     /**
      * 随机字符串
@@ -60,6 +69,7 @@ public class UnifiedOrderRequest implements Serializable {
     @NonNull
     @NotEmpty
     @Length(max = 32)
+    @XmlElement(name = "nonce_str")
     private String nonceStr;
     /**
      * 签名
@@ -67,11 +77,13 @@ public class UnifiedOrderRequest implements Serializable {
     @NonNull
     @NotEmpty
     @Length(max = 32)
+    @XmlElement(name = "sign")
     private String sign;
     /**
      * 签名类型
      */
     @Length(max = 32)
+    @XmlElement(name = "sign_type")
     private String signType = SignType.MD5.getCode();
     /**
      * 商品描述
@@ -79,16 +91,19 @@ public class UnifiedOrderRequest implements Serializable {
     @NonNull
     @NotEmpty
     @Length(max = 128)
+    @XmlElement(name = "body")
     private String body;
     /**
      * 商品详情
      */
     @Length(max = 8192)
+    @XmlElement(name = "detail")
     private String detail;
     /**
      * 附加数据
      */
     @Length(max = 127)
+    @XmlElement(name = "attach")
     private String attach;
     /**
      * 商户订单号 - 商户系统内部订单号，要求32个字符内，只能是数字、大小写字母_-|*且在同一个商户号下唯一
@@ -96,37 +111,44 @@ public class UnifiedOrderRequest implements Serializable {
     @NonNull
     @NotEmpty
     @Length(max = 32)
+    @XmlElement(name = "out_trade_no")
     private String outTradeNo;
     /**
      * 货币类型 - 符合ISO 4217标准的三位字母代码，默认人民币CNY
      */
     @Length(max = 16)
+    @XmlElement(name = "fee_type")
     private String feeType = FeeType.CNY.name();
     /**
      * 总金额 - 订单总金额，单位为分
      */
     @NonNull
     @Min(0)
+    @XmlElement(name = "total_fee")
     private Integer totalFee = 0;
     /**
      * 终端IP - 支持IPV4和IPV6两种格式的IP地址。调用微信支付API的机器IP
      */
     @Length(max = 64)
+    @XmlElement(name = "spbill_create_ip")
     private String spbillCreateIp;
     /**
      * 交易起始时间 - 订单生成时间，格式为yyyyMMddHHmmss，如2009年12月25日9点10分10秒表示为20091225091010
      */
     @Length(max = 14)
+    @XmlElement(name = "time_start")
     private String timeStart;
     /**
      * 交易结束时间 - 订单失效时间，格式为yyyyMMddHHmmss，如2009年12月27日9点10分10秒表示为20091227091010
      */
     @Length(max = 14)
+    @XmlElement(name = "time_expire")
     private String timeExpire;
     /**
      * 订单优惠标记 - 订单优惠标记，代金券或立减优惠功能的参数
      */
     @Length(max = 32)
+    @XmlElement(name = "goods_tag")
     private String goodsTag;
     /**
      * 通知地址 - 接收微信支付异步通知回调地址，通知url必须为直接可访问的url，不能携带参数。
@@ -134,6 +156,7 @@ public class UnifiedOrderRequest implements Serializable {
     @NonNull
     @NotEmpty
     @Length(max = 256)
+    @XmlElement(name = "notify_url")
     private String notifyUrl;
     /**
      * 交易类型
@@ -141,16 +164,19 @@ public class UnifiedOrderRequest implements Serializable {
     @NonNull
     @NotEmpty
     @Length(max = 16)
+    @XmlElement(name = "trade_type")
     private String tradeType;
     /**
      * 指定支付方式
      */
     @Length(max = 32)
+    @XmlElement(name = "limit_pay")
     private String limitPay = LimitPay.no_credit.name();
     /**
      * 开发票入口开放标识 - Y，传入Y时，支付成功消息和支付详情页将出现开票入口。<br/>
      * 需要在微信支付商户平台或微信公众平台开通电子发票功能，传此字段才可生效
      */
     @Length(max = 8)
+    @XmlElement(name = "receipt")
     private String receipt;
 }
