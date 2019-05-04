@@ -15,8 +15,10 @@
   </properties>
 
   <modules>
+    <module>yqboots-wechat-core</module>
     <module>yqboots-wechat-starter</module>
     <module>yqboots-wechat-starter-autoconfigure</module>
+    <module>yqboots-wechat-mock-server</module>
   </modules>
 
   <dependencyManagement>

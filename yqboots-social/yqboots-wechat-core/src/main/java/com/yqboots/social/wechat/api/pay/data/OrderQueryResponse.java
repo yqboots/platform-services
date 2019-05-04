@@ -1,7 +1,7 @@
 package com.yqboots.social.wechat.api.pay.data;
 
 import com.yqboots.social.wechat.api.annotation.*;
-import com.yqboots.social.wechat.constants.WeChatConstants;
+import com.yqboots.social.wechat.api.pay.FeeType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -18,40 +18,16 @@ import java.util.List;
 import static com.yqboots.social.wechat.constants.WeChatConstants.*;
 
 /**
- * <h3><a href="https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=9_7&index=3">支付结果通知</a></h3>
- * <p>支付完成后，微信会把相关支付结果及用户信息通过数据流的形式发送给商户，商户需要接收处理，并按文档规范返回应答。</p>
- * <ul>注意：
- * <li>同样的通知可能会多次发送给商户系统。商户系统必须能够正确处理重复的通知。</li>
- * <li>后台通知交互时，如果微信收到商户的应答不符合规范或超时，微信会判定本次通知失败，重新发送通知，直到成功为止（在通知一直不成功的情况下，微信总共会发起10次通知，通知频率为15s/15s/30s/3m/10m/20m/30m/30m/30m/60m/3h/3h/3h/6h/6h - 总计 24h4m），但微信不保证通知最终一定能成功。</li>
- * <li>在订单状态不明或者没有收到微信支付结果通知的情况下，建议商户主动调用微信支付【查询订单API】确认订单状态。</li>
- * </ul>
- * <br/>
- * <ul>特别提醒：
- * <li>商户系统对于支付结果通知的内容一定要做签名验证,并校验返回的订单金额是否与商户侧的订单金额一致，防止数据泄漏导致出现“假通知”，造成资金损失。</li>
- * <li>当收到通知进行处理时，首先检查对应业务数据的状态，判断该通知是否已经处理过，如果没有处理过再进行处理，如果处理过直接返回结果成功。在对业务数据进行状态检查和处理之前，要采用数据锁进行并发控制，以避免函数重入造成的数据混乱。</li>
- * </ul>
+ * 查询订单返回报文
+ *
+ * @author Eric H B Zhan
+ * @version 1.0.0
  */
 @Data
 @NoArgsConstructor
 @XmlRootElement(name = FIELD_ROOT_ELEMENT)
 @XmlAccessorType(XmlAccessType.FIELD)
-public class PaymentResultNotificationRequest {
-    /**
-     * 返回状态码
-     */
-    @NonNull
-    @NotEmpty
-    @Length(max = 16)
-    @XmlElement(name = "return_code")
-    private String returnCode;
-    /**
-     * 返回信息
-     */
-    @NonNull
-    @NotEmpty
-    @Length(max = 128)
-    @XmlElement(name = "return_msg")
-    private String returnMsg;
+public class OrderQueryResponse {
     /**
      * 应用ID
      */
@@ -65,15 +41,11 @@ public class PaymentResultNotificationRequest {
     @XmlElement(name = FIELD_MERCHANT_ID)
     private String mchId;
     /**
-     * 设备号 - 终端设备号(门店号或收银设备ID)，默认请传"WEB"
-     */
-    @Length(max = 32)
-    @XmlElement(name = "device_info")
-    private String deviceInfo = WeChatConstants.DEFAULT_DEVICE_INFO;
-    /**
      * 随机字符串
      */
-    @NonceStr
+    @NonNull
+    @NotEmpty
+    @Length(max = 32)
     @XmlElement(name = FIELD_NONCE_STR)
     private String nonceStr;
     /**
@@ -104,6 +76,13 @@ public class PaymentResultNotificationRequest {
     private String errCodeDes;
 
     /**
+     * 设备号 - 终端设备号(门店号或收银设备ID)，默认请传"WEB"
+     */
+    @Length(max = 32)
+    @XmlElement(name = FIELD_DEVICE_INFO)
+    private String deviceInfo = DEFAULT_DEVICE_INFO;
+
+    /**
      * 用户标识 - 用户在商户appid下的唯一标识
      */
     @NonNull
@@ -111,6 +90,7 @@ public class PaymentResultNotificationRequest {
     @Length(max = 128)
     @XmlElement(name = FIELD_OPEN_ID)
     private String openId;
+
     /**
      * 是否关注公众账号
      */
@@ -119,6 +99,7 @@ public class PaymentResultNotificationRequest {
     @Length(max = 1)
     @XmlElement(name = FIELD_IS_SUBSCRIBE)
     private String isSubscribe;
+
     /**
      * 交易类型
      */
@@ -127,6 +108,15 @@ public class PaymentResultNotificationRequest {
     @Length(max = 16)
     @XmlElement(name = FIELD_TRADE_TYPE)
     private String tradeType;
+    /**
+     * 交易状态
+     */
+    @NonNull
+    @NotEmpty
+    @Length(max = 32)
+    @XmlElement(name = FIELD_TRADE_STATE)
+    private String tradeState;
+
     /**
      * 付款银行
      */
@@ -143,11 +133,11 @@ public class PaymentResultNotificationRequest {
     @XmlElement(name = FIELD_TOTAL_FEE)
     private Integer totalFee;
     /**
-     * 货币种类
+     * 货币类型 - 符合ISO 4217标准的三位字母代码，默认人民币CNY
      */
-    @Length(max = 8)
+    @Length(max = 16)
     @XmlElement(name = FIELD_FEE_TYPE)
-    private String feeType;
+    private String feeType = FeeType.CNY.name();
     /**
      * 现金支付金额
      */
@@ -161,28 +151,43 @@ public class PaymentResultNotificationRequest {
     @Length(max = 16)
     @XmlElement(name = FIELD_CASH_FEE_TYPE)
     private String cashFeeType;
+
+    /**
+     * 应结订单金额
+     */
+    @XmlElement(name = FIELD_SETTLEMENT_TOTAL_FEE)
+    private Integer settlementTotalFee;
+
     /**
      * 代金券金额
      */
     @Length(max = 1)
     @XmlElement(name = FIELD_COUPON_FEE)
     private Integer couponFee;
+
     /**
      * 代金券使用数量
      */
     @Length(max = 1)
     @XmlElement(name = FIELD_COUPON_COUNT)
     private Integer couponCount;
+
     /**
      * 代金券ID
      */
     @XmlElement(name = "coupon_ids")
     private List<String> couponIds; // coupon_id_$n
     /**
+     * 代金券类型
+     */
+    @XmlElement(name = "coupon_types")
+    private List<String> couponTypes; // coupon_type_$n
+    /**
      * 代金券支付金额
      */
     @XmlElement(name = "coupon_fees")
     private List<Integer> couponFees; // coupon_fee_$n
+
     /**
      * 微信支付订单号
      */
@@ -196,7 +201,7 @@ public class PaymentResultNotificationRequest {
     @XmlElement(name = FIELD_OUT_TRADE_NO)
     private String outTradeNo;
     /**
-     * 商家数据包，原样返回
+     * 附加数据
      */
     @Length(max = 128)
     @XmlElement(name = FIELD_ATTACH)
@@ -209,4 +214,8 @@ public class PaymentResultNotificationRequest {
     @Length(max = 14)
     @XmlElement(name = FIELD_TIME_END)
     private String timeEnd;
+
+    @Length(max = 256)
+    @XmlElement(name = FIELD_TRADE_STATE_DESCRIPTION)
+    private String tradeStateDesc;
 }
