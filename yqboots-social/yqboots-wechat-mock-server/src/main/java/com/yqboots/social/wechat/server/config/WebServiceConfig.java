@@ -27,8 +27,8 @@ public class WebServiceConfig extends WsConfigurerAdapter {
     @Bean
     public DefaultWsdl11Definition defaultWsdl11DefinitionForOrderQuery() {
         DefaultWsdl11Definition bean = new DefaultWsdl11Definition();
-        bean.setPortTypeName("WeChatOrderQueryPortType");
-        bean.setLocationUri("/weChatPayService");
+        bean.setPortTypeName("WeChatOrderQueryPort");
+        bean.setLocationUri("/ws");
         bean.setTargetNamespace(WeChatConstants.NAMESPACE_URI);
         bean.setSchema(schemaForOrderQuery());
         return bean;
