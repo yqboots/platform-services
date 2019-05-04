@@ -7,6 +7,8 @@ package com.yqboots.social.wechat.constants;
  * @version 1.0.0
  */
 public final class WeChatConstants {
+    public static final String NAMESPACE_URI = "http://www.yqboots.com/ws/wechat/schemas";
+
     private static final String SUCCESS = "SUCCESS";
     private static final String FAIL = "FAIL";
 

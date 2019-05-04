@@ -1,5 +1,10 @@
 package com.yqboots.social.wechat.server.endpoint;
 
+import com.yqboots.social.wechat.api.pay.data.OrderQueryRequest;
+import com.yqboots.social.wechat.api.pay.data.OrderQueryResponse;
+import com.yqboots.social.wechat.constants.WeChatConstants;
+import com.yqboots.social.wechat.server.service.WeChatPayService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -7,11 +12,16 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 @Endpoint
 public class WeChatPayEndpoint {
-    private static final String NAMESPACE_URI = "http://www.yqboots.com/ws/social/schema";
+    private WeChatPayService weChatPayService;
 
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getCountryRequest")
+    @PayloadRoot(namespace = WeChatConstants.NAMESPACE_URI, localPart = "queryOrderRequest")
     @ResponsePayload
-    public Object queryOrder(@RequestPayload Object request) {
-        return null;
+    public OrderQueryResponse queryOrder(@RequestPayload OrderQueryRequest request) {
+        return weChatPayService.queryOrder(request);
+    }
+
+    @Autowired
+    public void setWeChatPayService(WeChatPayService weChatPayService) {
+        this.weChatPayService = weChatPayService;
     }
 }
