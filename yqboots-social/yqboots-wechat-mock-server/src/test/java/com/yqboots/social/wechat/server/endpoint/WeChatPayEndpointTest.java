@@ -1,31 +1,49 @@
 package com.yqboots.social.wechat.server.endpoint;
 
-import com.yqboots.social.wechat.api.pay.data.OrderQueryRequest;
-import com.yqboots.social.wechat.api.pay.data.OrderQueryResponse;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import org.springframework.ws.client.core.WebServiceTemplate;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.ws.test.server.MockWebServiceClient;
+import org.springframework.xml.transform.StringSource;
 
-// @RunWith(SpringRunner.class)
-// @SpringBootTest
+import javax.xml.transform.Source;
+
+import static org.springframework.ws.test.server.RequestCreators.withPayload;
+import static org.springframework.ws.test.server.ResponseMatchers.payload;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class WeChatPayEndpointTest {
-    private WebServiceTemplate webServiceTemplate;
+    @Autowired
+    private ApplicationContext applicationContext;
+
+    private MockWebServiceClient mockClient;
 
     @Before
     public void setUp() {
-        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-        marshaller.setClassesToBeBound(OrderQueryRequest.class, OrderQueryResponse.class);
-        webServiceTemplate = new WebServiceTemplate(marshaller);
+        mockClient = MockWebServiceClient.createClient(applicationContext);
     }
 
     @Test
-    public void queryOrder() {
-        OrderQueryResponse response = (OrderQueryResponse) webServiceTemplate.marshalSendAndReceive(
-                "http://localhost:8090/ws/weChatPayService/wechat-order-query.wsdl",
-                new OrderQueryRequest()
-        );
+    public void queryOrder() throws Exception {
+        Source requestPayload = new StringSource(
+                "<xml>" +
+                        "<appid>123</appid>" +
+                        "<mch_id>321</mch_id>" +
+                        "</xml>");
+        Source responsePayload = new StringSource(
+                "<xml>" +
+                        "<appid>123</appid>" +
+                        "<mch_id>321</mch_id>" +
+                        "<device_info>WEB</device_info>" +
+                        "<fee_type>CNY</fee_type>" +
+                        "<cash_fee>100</cash_fee>" +
+                        "</xml>");
 
-        System.out.println(response.toString());
+        mockClient.sendRequest(withPayload(requestPayload)).andExpect(payload(responsePayload));
     }
 }
