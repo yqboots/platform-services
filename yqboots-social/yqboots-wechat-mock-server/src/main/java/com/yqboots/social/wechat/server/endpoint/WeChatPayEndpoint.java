@@ -4,22 +4,18 @@ import com.yqboots.social.wechat.api.pay.data.OrderQueryRequest;
 import com.yqboots.social.wechat.api.pay.data.OrderQueryResponse;
 import com.yqboots.social.wechat.server.service.WeChatPayService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ws.server.endpoint.annotation.Endpoint;
+import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
+import org.springframework.ws.server.endpoint.annotation.RequestPayload;
+import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
-@RestController
-@RequestMapping(
-        produces = {MediaType.APPLICATION_XML_VALUE},
-        consumes = {MediaType.APPLICATION_XML_VALUE}
-)
+@Endpoint
 public class WeChatPayEndpoint {
     private WeChatPayService weChatPayService;
 
-    @RequestMapping(value = "/pay/orderquery", method = RequestMethod.POST)
-    public OrderQueryResponse queryOrder(@RequestBody OrderQueryRequest request) {
+    @PayloadRoot(localPart = "xml")
+    @ResponsePayload
+    public OrderQueryResponse queryOrder(@RequestPayload OrderQueryRequest request) {
         return weChatPayService.queryOrder(request);
     }
 

@@ -29,7 +29,7 @@ public class WeChatPayEndpointTest {
     }
 
     @Test
-    public void queryOrder() throws Exception {
+    public void queryOrder() {
         Source requestPayload = new StringSource(
                 "<xml>" +
                         "<appid>123</appid>" +
