@@ -48,73 +48,79 @@
       "description": "Token"
     },
     {
-      "sourceType": "com.yqboots.social.wechat.WeChatProperties#Pay",
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties#AuthProperties",
+      "name": "yqboots.social.wechat.auth.access-token-url",
+      "type": "java.lang.String",
+      "description": "Get OpenID URL"
+    },
+    {
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties#PayProperties",
       "name": "yqboots.social.wechat.pay.cert-path",
       "type": "java.lang.String",
       "description": "Cert Path"
     },
     {
-      "sourceType": "com.yqboots.social.wechat.WeChatProperties#Pay",
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties#PayProperties",
       "name": "yqboots.social.wechat.pay.unified-order-url",
       "type": "java.lang.String",
       "description": "Unified Order URL"
     },
     {
-      "sourceType": "com.yqboots.social.wechat.WeChatProperties#Pay",
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties#PayProperties",
       "name": "yqboots.social.wechat.pay.pay-notify-url",
       "type": "java.lang.String",
       "description": "Pay Notify Callback Url"
     },
     {
-      "sourceType": "com.yqboots.social.wechat.WeChatProperties#Pay",
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties#PayProperties",
       "name": "yqboots.social.wechat.pay.order-query-url",
       "type": "java.lang.String",
       "description": "Order Query URL"
     },
     {
-      "sourceType": "com.yqboots.social.wechat.WeChatProperties#Pay",
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties#PayProperties",
       "name": "yqboots.social.wechat.pay.close-order-url",
       "type": "java.lang.String",
       "description": "Close Order URL"
     },
     {
-      "sourceType": "com.yqboots.social.wechat.WeChatProperties#Pay",
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties#PayProperties",
       "name": "yqboots.social.wechat.pay.refund-url",
       "type": "java.lang.String",
       "description": "Refund URL"
     },
     {
-      "sourceType": "com.yqboots.social.wechat.WeChatProperties#Pay",
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties#PayProperties",
       "name": "yqboots.social.wechat.pay.refund-notify-url",
       "type": "java.lang.String",
       "description": "Refund Notify Callback URL"
     },
     {
-      "sourceType": "com.yqboots.social.wechat.WeChatProperties#Pay",
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties#PayProperties",
       "name": "yqboots.social.wechat.pay.refund-query-url",
       "type": "java.lang.String",
       "description": "Refund Query URL"
     },
     {
-      "sourceType": "com.yqboots.social.wechat.WeChatProperties#Pay",
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties#PayProperties",
       "name": "yqboots.social.wechat.pay.download-bill-url",
       "type": "java.lang.String",
       "description": "Download Bill URL"
     },
     {
-      "sourceType": "com.yqboots.social.wechat.WeChatProperties#Pay",
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties#PayProperties",
       "name": "yqboots.social.wechat.pay.download-fund-flow-url",
       "type": "java.lang.String",
       "description": "Download Fund FLow URL"
     },
     {
-      "sourceType": "com.yqboots.social.wechat.WeChatProperties#Pay",
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties#PayProperties",
       "name": "yqboots.social.wechat.pay.report-url",
       "type": "java.lang.String",
-      "description": ""
+      "description": "Report URL"
     },
     {
-      "sourceType": "com.yqboots.social.wechat.WeChatProperties#Pay",
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties#PayProperties",
       "name": "yqboots.social.wechat.pay.batch-query-comment-url",
       "type": "java.lang.String",
       "description": "Batch Query Comment URL"

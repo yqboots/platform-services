@@ -36,6 +36,7 @@ public class WeChatProperties {
      * 支付属性
      */
     private PayProperties pay;
+    private AuthProperties auth;
 
     @Data
     public static class PayProperties {
@@ -87,5 +88,10 @@ public class WeChatProperties {
          * 拉取订单评价数据
          */
         private String batchQueryCommentUrl;
+    }
+
+    @Data
+    public static class AuthProperties {
+        private String accessTokenUrl;
     }
 }

@@ -6,6 +6,8 @@ yqboots:
       partner-id: XXXXXXXXXX
       partner-key: XXXXXXXXXX
       token: XXXXXXXXXX
+      auth:
+        access-token-url: https://api.weixin.qq.com/sns/oauth2/access_token
       pay:
         cert-path: META-INF/resources/wxpay/cert/apiclient_cert.p12
         unified-order-url: https://api.mch.weixin.qq.com/pay/unifiedorder
