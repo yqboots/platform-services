@@ -3,12 +3,18 @@ package com.yqboots.social.wechat.client.impl;
 import com.yqboots.social.wechat.WeChatProperties;
 import com.yqboots.social.wechat.api.auth.data.OpenIdRequest;
 import com.yqboots.social.wechat.api.auth.data.OpenIdResponse;
-import com.yqboots.social.wechat.api.pay.data.RefundRequest;
-import com.yqboots.social.wechat.api.pay.data.RefundResponse;
+import com.yqboots.social.wechat.api.pay.data.*;
 import com.yqboots.social.wechat.client.WeChatClient;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.xml.transform.StringResult;
+import org.springframework.xml.transform.StringSource;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -18,16 +24,21 @@ public class WeChatClientImpl implements WeChatClient {
 
     private final WeChatProperties properties;
 
-    public WeChatClientImpl(final RestTemplate restTemplate, final WeChatProperties properties) {
+    private final Jaxb2Marshaller jaxb2Marshaller;
+
+    public WeChatClientImpl(final RestTemplate restTemplate,
+                            final WeChatProperties properties,
+                            final Jaxb2Marshaller jaxb2Marshaller) {
         this.restTemplate = restTemplate;
         this.properties = properties;
+        this.jaxb2Marshaller = jaxb2Marshaller;
     }
 
     /**
      * @inheritDoc
      */
     @Override
-    public String getOpenID(OpenIdRequest request) {
+    public OpenIdResponse getOpenID(OpenIdRequest request) {
         Map<String, Object> params = new HashMap<>();
         params.put("appid", request.getAppId());
         params.put("secret", request.getAppSecret());
@@ -40,11 +51,7 @@ public class WeChatClientImpl implements WeChatClient {
                 params
         );
 
-        if (response.hasBody()) {
-            return Objects.requireNonNull(response.getBody()).getOpenId();
-        }
-
-        return null;
+        return Objects.requireNonNull(response.getBody());
     }
 
     /**
@@ -52,6 +59,54 @@ public class WeChatClientImpl implements WeChatClient {
      */
     @Override
     public RefundResponse doRefund(RefundRequest request) {
-        return null;
+        return invoke(request, properties.getPay().getRefundUrl());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public RefundQueryResponse queryRefund(RefundQueryRequest request) {
+        return invoke(request, properties.getPay().getRefundQueryUrl());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public OrderQueryResponse queryOrder(OrderQueryRequest request) {
+        return invoke(request, properties.getPay().getOrderQueryUrl());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public OrderCloseResponse closeOrder(OrderCloseRequest request) {
+        return invoke(request, properties.getPay().getOrderCloseUrl());
+    }
+
+    @SuppressWarnings({"unchecked"})
+    private <REQ extends Serializable, RES extends Serializable> RES invoke(REQ request, String url) {
+        StringResult requestStr = new StringResult();
+        jaxb2Marshaller.marshal(request, requestStr);
+
+        HttpEntity<String> httpEntity = new HttpEntity<>(requestStr.toString(), getCommonXmlHeaders());
+
+        ResponseEntity<String> response = restTemplate.postForEntity(
+                url,
+                httpEntity,
+                String.class
+        );
+
+        return (RES) jaxb2Marshaller.unmarshal(new StringSource(Objects.requireNonNull(response.getBody())));
+    }
+
+    private static HttpHeaders getCommonXmlHeaders() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("X-COM-PERSIST", "true");
+        headers.set("Content-Type", MediaType.APPLICATION_XML_VALUE);
+
+        return headers;
     }
 }

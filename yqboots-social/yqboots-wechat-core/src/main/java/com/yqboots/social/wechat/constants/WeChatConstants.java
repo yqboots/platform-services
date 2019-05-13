@@ -39,6 +39,7 @@ public final class WeChatConstants {
     public static final String FIELD_BANK_TYPE = "bank_type";
     public static final String FIELD_BODY = "body";
     public static final String FIELD_CASH_FEE = "cash_fee";
+    public static final String FIELD_CASH_REFUND_FEE = "cash_refund_fee";
     public static final String FIELD_CASH_FEE_TYPE = "cash_fee_type";
     public static final String FIELD_COUPON_COUNT = "coupon_count";
     public static final String FIELD_COUPON_FEE = "coupon_fee";
@@ -55,14 +56,23 @@ public final class WeChatConstants {
     public static final String FIELD_NOTIFY_URL = "notify_url";
     public static final String FIELD_OPEN_ID = "openid";
     public static final String FIELD_OUT_TRADE_NO = "out_trade_no";
+    public static final String FIELD_OUT_REFUND_NO = "out_refund_no";
+    public static final String FIELD_REFUND_ID = "refund_id";
+    public static final String FIELD_REFUND_FEE = "refund_fee";
+    public static final String FIELD_REFUND_FEE_TYPE = "refundFeeType";
+    public static final String FIELD_REFUND_DESC = "refundDesc";
+    public static final String FIELD_REFUND_ACCOUNT = "refundAccount";
+    public static final String FIELD_OFFSET = "offset";
     public static final String FIELD_PACKAGE = "package";
     public static final String FIELD_PARTNER_ID = "partnerid";
     public static final String FIELD_PREPAY_ID = "prepay_id";
     public static final String FIELD_RECEIPT = "receipt";
     public static final String FIELD_RESULT_CODE = "result_code";
+    public static final String FIELD_RESULT_MSG = "result_msg";
     public static final String FIELD_RETURN_CODE = "return_code";
     public static final String FIELD_RETURN_MSG = "return_msg";
     public static final String FIELD_SETTLEMENT_TOTAL_FEE = "settlement_total_fee";
+    public static final String FIELD_SETTLEMENT_REFUND_FEE = "settlement_refund_fee";
     public static final String FIELD_SIGN = "sign";
     public static final String FIELD_SIGN_TYPE = "sign_type";
     public static final String FIELD_SPBILL_CREATE_IP = "spbill_create_ip";
@@ -75,4 +85,5 @@ public final class WeChatConstants {
     public static final String FIELD_TRADE_STATE_DESCRIPTION = "trade_state_desc";
     public static final String FIELD_TRADE_TYPE = "trade_type";
     public static final String FIELD_TRANSACTION_ID = "transaction_id";
+    public static final String FIELD_TOTAL_REFUND_COUNT = "total_refund_count";
 }

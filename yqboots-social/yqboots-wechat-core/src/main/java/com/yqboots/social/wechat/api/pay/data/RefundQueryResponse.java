@@ -1,12 +1,13 @@
 package com.yqboots.social.wechat.api.pay.data;
 
 import com.yqboots.social.wechat.api.annotation.*;
-import com.yqboots.social.wechat.api.pay.SignType;
+import com.yqboots.social.wechat.api.pay.FeeType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -17,15 +18,48 @@ import java.io.Serializable;
 
 import static com.yqboots.social.wechat.constants.WeChatConstants.*;
 
-/**
- * 当交易发生之后一段时间内，由于买家或者卖家的原因需要退款时，
- * 卖家可以通过退款接口将支付款退还给买家，微信支付将在收到退款请求并且验证成功之后，按照退款规则将支付款按原路退到买家帐号上。
- */
 @Data
 @NoArgsConstructor
 @XmlRootElement(name = FIELD_ROOT_ELEMENT)
 @XmlAccessorType(XmlAccessType.FIELD)
-public class RefundRequest implements Serializable {
+public class RefundQueryResponse implements Serializable {
+    /**
+     * 返回状态码
+     */
+    @NonNull
+    @NotEmpty
+    @Length(max = 16)
+    @XmlElement(name = "return_code")
+    private String returnCode;
+    /**
+     * 返回信息
+     */
+    @NonNull
+    @NotEmpty
+    @Length(max = 128)
+    @XmlElement(name = "return_msg")
+    private String returnMsg;
+
+    /**
+     * 业务结果 - SUCCESS/FAIL
+     */
+    @Length(max = 16)
+    @XmlElement(name = FIELD_RESULT_CODE)
+    private String resultCode;
+
+    /**
+     * 错误代码
+     */
+    @Length(max = 32)
+    @XmlElement(name = FIELD_ERROR_CODE)
+    private String errCode;
+    /**
+     * 错误代码描述
+     */
+    @Length(max = 128)
+    @XmlElement(name = FIELD_ERROR_CODE_DESCRIPTION)
+    private String errCodeDes;
+
     /**
      * 应用ID
      */
@@ -41,7 +75,9 @@ public class RefundRequest implements Serializable {
     /**
      * 随机字符串
      */
-    @NonceStr
+    @NonNull
+    @NotEmpty
+    @Length(max = 32)
     @XmlElement(name = FIELD_NONCE_STR)
     private String nonceStr;
     /**
@@ -50,12 +86,7 @@ public class RefundRequest implements Serializable {
     @Sign
     @XmlElement(name = FIELD_SIGN)
     private String sign;
-    /**
-     * 签名类型
-     */
-    @Length(max = 32)
-    @XmlElement(name = FIELD_SIGN_TYPE)
-    private String signType = SignType.MD5.getCode();
+
     /**
      * 微信支付订单号, 微信的订单号，优先使用
      */
@@ -69,50 +100,40 @@ public class RefundRequest implements Serializable {
     @XmlElement(name = FIELD_OUT_TRADE_NO)
     private String outTradeNo;
     /**
-     * 商户退款单号
+     * 订单总退款次数
      */
-    @OutTradeNo
-    @Length(max = 64)
-    @XmlElement(name = FIELD_OUT_REFUND_NO)
-    private String outRefundNo;
+    @XmlElement(name = FIELD_TOTAL_REFUND_COUNT)
+    private Integer totalRefundCount;
     /**
-     * 订单金额
+     * 总金额 - 订单总金额，单位为分
      */
     @NonNull
     @NotNull
+    @Min(0)
     @XmlElement(name = FIELD_TOTAL_FEE)
-    private Integer totalFee;
+    private Integer totalFee = 0;
     /**
-     * 退款金额
-     */
-    @NonNull
-    @NotNull
-    @XmlElement(name = FIELD_REFUND_FEE)
-    private Integer refundFee;
-    /**
-     * 退款金额
+     * 货币类型 - 符合ISO 4217标准的三位字母代码，默认人民币CNY
      */
     @Length(max = 8)
-    @XmlElement(name = FIELD_REFUND_FEE_TYPE)
-    private String refundFeeType;
+    @XmlElement(name = FIELD_FEE_TYPE)
+    private String feeType = FeeType.CNY.name();
     /**
-     * 退款原因
-     */
-    @Length(max = 80)
-    @XmlElement(name = FIELD_REFUND_DESC)
-    private String refundDesc;
-    /**
-     * 退款资金来源
-     */
-    @Length(max = 30)
-    @XmlElement(name = FIELD_REFUND_ACCOUNT)
-    private String refundAccount;
-    /**
-     * 通知地址
+     * 现金支付金额
      */
     @NonNull
-    @NotEmpty
-    @Length(max = 256)
-    @XmlElement(name = FIELD_NOTIFY_URL)
-    private String notifyUrl;
+    @NotNull
+    @XmlElement(name = FIELD_CASH_FEE)
+    private Integer cashFee;
+    /**
+     * 现金支付货币类型
+     */
+    @Length(max = 16)
+    @XmlElement(name = FIELD_CASH_FEE_TYPE)
+    private String cashFeeType;
+    /**
+     * 应结订单金额
+     */
+    @XmlElement(name = FIELD_SETTLEMENT_TOTAL_FEE)
+    private Integer settlementTotalFee;
 }

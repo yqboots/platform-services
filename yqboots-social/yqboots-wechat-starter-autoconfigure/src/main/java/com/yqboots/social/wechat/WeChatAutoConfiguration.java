@@ -1,5 +1,8 @@
 package com.yqboots.social.wechat;
 
+import com.yqboots.social.wechat.api.auth.data.OpenIdRequest;
+import com.yqboots.social.wechat.api.auth.data.OpenIdResponse;
+import com.yqboots.social.wechat.api.pay.data.*;
 import com.yqboots.social.wechat.client.WeChatClient;
 import com.yqboots.social.wechat.client.impl.WeChatClientImpl;
 import com.yqboots.social.wechat.client.util.HttpClientUtils;
@@ -11,6 +14,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.RestTemplate;
 
@@ -40,7 +44,7 @@ public class WeChatAutoConfiguration {
 
     @Bean
     public WeChatClient weChatClient() throws Exception {
-        return new WeChatClientImpl(restTemplate(), properties);
+        return new WeChatClientImpl(restTemplate(), properties, jaxb2Marshaller());
     }
 
     @PostConstruct
@@ -67,6 +71,22 @@ public class WeChatAutoConfiguration {
         return new RestTemplate(new HttpComponentsClientHttpRequestFactory(
                 HttpClientUtils.acceptsTrustedCertsHttpClient(properties.getPartnerId()))
         );
+    }
+
+    private Jaxb2Marshaller jaxb2Marshaller() {
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        marshaller.setClassesToBeBound(
+                OpenIdRequest.class, OpenIdResponse.class,
+                InitiatePaymentRequest.class,
+                OrderCloseRequest.class, OrderCloseResponse.class,
+                OrderQueryRequest.class, OrderQueryResponse.class,
+                PaymentResultNotificationRequest.class, PaymentResultNotificationResponse.class,
+                RefundQueryRequest.class, RefundQueryResponse.class,
+                RefundRequest.class, RefundResponse.class,
+                UnifiedOrderRequest.class, UnifiedOrderResponse.class
+        );
+
+        return marshaller;
     }
 
     @Autowired

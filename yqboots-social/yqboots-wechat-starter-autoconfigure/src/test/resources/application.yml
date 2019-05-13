@@ -13,7 +13,7 @@ yqboots:
         unified-order-url: https://api.mch.weixin.qq.com/pay/unifiedorder
         pay-notify-url: https://www.yqboots.com/wechat/pay/notify
         order-query-url: https://api.mch.weixin.qq.com/pay/orderquery
-        close-order-url: https://api.mch.weixin.qq.com/pay/closeorder
+        order-close-url: https://api.mch.weixin.qq.com/pay/closeorder
         refund-url: https://api.mch.weixin.qq.com/secapi/pay/refund
         refund-notify-url: https://www.yqboots.com/wechat/refund/notify
         refund-query-url: https://api.mch.weixin.qq.com/pay/refundquery

@@ -59,7 +59,7 @@ public class WeChatProperties {
         /**
          * 关闭订单
          */
-        private String closeOrderUrl;
+        private String orderCloseUrl;
         /**
          * 申请退款
          */

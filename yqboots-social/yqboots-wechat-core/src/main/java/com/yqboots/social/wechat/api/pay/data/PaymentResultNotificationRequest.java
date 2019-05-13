@@ -41,7 +41,7 @@ public class PaymentResultNotificationRequest {
     @NonNull
     @NotEmpty
     @Length(max = 16)
-    @XmlElement(name = "return_code")
+    @XmlElement(name = FIELD_RETURN_CODE)
     private String returnCode;
     /**
      * 返回信息
@@ -49,7 +49,7 @@ public class PaymentResultNotificationRequest {
     @NonNull
     @NotEmpty
     @Length(max = 128)
-    @XmlElement(name = "return_msg")
+    @XmlElement(name = FIELD_RETURN_MSG)
     private String returnMsg;
     /**
      * 应用ID
