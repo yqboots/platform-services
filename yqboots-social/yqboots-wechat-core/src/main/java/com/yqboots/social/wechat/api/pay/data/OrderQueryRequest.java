@@ -1,14 +1,15 @@
 package com.yqboots.social.wechat.api.pay.data;
 
-import com.yqboots.social.wechat.api.annotation.*;
+import com.yqboots.social.wechat.api.annotation.OutTradeNo;
+import com.yqboots.social.wechat.api.annotation.TransactionId;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
 
 import static com.yqboots.social.wechat.constants.WeChatConstants.*;
 
@@ -24,23 +25,10 @@ import static com.yqboots.social.wechat.constants.WeChatConstants.*;
  */
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @XmlRootElement(name = FIELD_ROOT_ELEMENT)
 @XmlAccessorType(XmlAccessType.FIELD)
-public class OrderQueryRequest implements Serializable {
-    /**
-     * 应用ID
-     */
-    @AppId
-    @XmlElement(name = FIELD_APPID)
-    private String appId;
-
-    /**
-     * 商户号
-     */
-    @MerchantId
-    @XmlElement(name = FIELD_MERCHANT_ID)
-    private String mchId;
-
+public class OrderQueryRequest extends AbstractWeChatPayData {
     /**
      * 微信支付订单号, 微信的订单号，优先使用
      */
@@ -55,18 +43,4 @@ public class OrderQueryRequest implements Serializable {
     @OutTradeNo
     @XmlElement(name = FIELD_OUT_TRADE_NO)
     private String outTradeNo;
-
-    /**
-     * 随机字符串
-     */
-    @NonceStr
-    @XmlElement(name = FIELD_NONCE_STR)
-    private String nonceStr;
-
-    /**
-     * 签名
-     */
-    @Sign
-    @XmlElement(name = FIELD_SIGN)
-    private String sign;
 }

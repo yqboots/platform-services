@@ -1,7 +1,9 @@
 package com.yqboots.social.wechat.api.pay.data;
 
-import com.yqboots.social.wechat.api.annotation.*;
+import com.yqboots.social.wechat.api.annotation.OutTradeNo;
+import com.yqboots.social.wechat.api.annotation.TransactionId;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.hibernate.validator.constraints.Length;
@@ -32,9 +34,10 @@ import static com.yqboots.social.wechat.constants.WeChatConstants.*;
  */
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @XmlRootElement(name = FIELD_ROOT_ELEMENT)
 @XmlAccessorType(XmlAccessType.FIELD)
-public class PaymentResultNotificationRequest {
+public class PaymentResultNotificationRequest extends AbstractWeChatPayData {
     /**
      * 返回状态码
      */
@@ -52,36 +55,11 @@ public class PaymentResultNotificationRequest {
     @XmlElement(name = FIELD_RETURN_MSG)
     private String returnMsg;
     /**
-     * 应用ID
-     */
-    @AppId
-    @XmlElement(name = FIELD_APPID)
-    private String appId;
-    /**
-     * 商户号
-     */
-    @MerchantId
-    @XmlElement(name = FIELD_MERCHANT_ID)
-    private String mchId;
-    /**
      * 设备号 - 终端设备号(门店号或收银设备ID)，默认请传"WEB"
      */
     @Length(max = 32)
     @XmlElement(name = "device_info")
     private String deviceInfo = DEFAULT_DEVICE_INFO;
-    /**
-     * 随机字符串
-     */
-    @NonceStr
-    @XmlElement(name = FIELD_NONCE_STR)
-    private String nonceStr;
-    /**
-     * 签名
-     */
-    @Sign
-    @XmlElement(name = FIELD_SIGN)
-    private String sign;
-
     /**
      * 业务结果 - SUCCESS/FAIL
      */

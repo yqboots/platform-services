@@ -8,6 +8,7 @@ import lombok.NonNull;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotEmpty;
+import java.io.Serializable;
 
 import static com.yqboots.social.wechat.constants.WeChatConstants.*;
 
@@ -22,7 +23,7 @@ import static com.yqboots.social.wechat.constants.WeChatConstants.*;
  */
 @Data
 @NoArgsConstructor
-public class InitiatePaymentRequest {
+public class InitiatePaymentRequest implements Serializable {
     @AppId
     @JsonProperty(FIELD_APPID)
     private String appId;
@@ -31,6 +32,16 @@ public class InitiatePaymentRequest {
     @Length(max = 32)
     @JsonProperty(FIELD_PARTNER_ID)
     private String partnerId;
+    @NonNull
+    @NotEmpty
+    @Length(max = 32)
+    @JsonProperty(FIELD_NONCE_STR)
+    private String nonceStr;
+    @NonNull
+    @NotEmpty
+    @Length(max = 32)
+    @JsonProperty(FIELD_SIGN)
+    private String sign;
     @NonNull
     @NotEmpty
     @Length(max = 32)
@@ -43,17 +54,7 @@ public class InitiatePaymentRequest {
     private String pkg = PACKAGE;
     @NonNull
     @NotEmpty
-    @Length(max = 32)
-    @JsonProperty(FIELD_NONCE_STR)
-    private String nonceStr;
-    @NonNull
-    @NotEmpty
     @Length(max = 10)
     @JsonProperty(FIELD_TIMESTAMP)
     private String timestamp;
-    @NonNull
-    @NotEmpty
-    @Length(max = 32)
-    @JsonProperty(FIELD_SIGN)
-    private String sign;
 }

@@ -1,8 +1,10 @@
 package com.yqboots.social.wechat.api.pay.data;
 
-import com.yqboots.social.wechat.api.annotation.*;
+import com.yqboots.social.wechat.api.annotation.OutTradeNo;
+import com.yqboots.social.wechat.api.annotation.TransactionId;
 import com.yqboots.social.wechat.api.pay.FeeType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.hibernate.validator.constraints.Length;
@@ -13,7 +15,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
 import java.util.List;
 
 import static com.yqboots.social.wechat.constants.WeChatConstants.*;
@@ -26,56 +27,10 @@ import static com.yqboots.social.wechat.constants.WeChatConstants.*;
  */
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @XmlRootElement(name = FIELD_ROOT_ELEMENT)
 @XmlAccessorType(XmlAccessType.FIELD)
-public class OrderQueryResponse implements Serializable {
-    /**
-     * 应用ID
-     */
-    @AppId
-    @XmlElement(name = FIELD_APPID)
-    private String appId;
-    /**
-     * 商户号
-     */
-    @MerchantId
-    @XmlElement(name = FIELD_MERCHANT_ID)
-    private String mchId;
-    /**
-     * 随机字符串
-     */
-    @NonNull
-    @NotEmpty
-    @Length(max = 32)
-    @XmlElement(name = FIELD_NONCE_STR)
-    private String nonceStr;
-    /**
-     * 签名
-     */
-    @Sign
-    @XmlElement(name = FIELD_SIGN)
-    private String sign;
-
-    /**
-     * 业务结果 - SUCCESS/FAIL
-     */
-    @Length(max = 16)
-    @XmlElement(name = FIELD_RESULT_CODE)
-    private String resultCode;
-
-    /**
-     * 错误代码
-     */
-    @Length(max = 32)
-    @XmlElement(name = FIELD_ERROR_CODE)
-    private String errCode;
-    /**
-     * 错误代码描述
-     */
-    @Length(max = 128)
-    @XmlElement(name = FIELD_ERROR_CODE_DESCRIPTION)
-    private String errCodeDes;
-
+public class OrderQueryResponse extends AbstractWeChatPayResponseData {
     /**
      * 设备号 - 终端设备号(门店号或收银设备ID)，默认请传"WEB"
      */
