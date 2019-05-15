@@ -7,6 +7,8 @@ import com.yqboots.social.wechat.api.annotation.Sign;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
 
@@ -14,6 +16,7 @@ import static com.yqboots.social.wechat.constants.WeChatConstants.*;
 
 @Data
 @NoArgsConstructor
+@XmlAccessorType(XmlAccessType.FIELD)
 public abstract class AbstractWeChatPayData implements Serializable {
     /**
      * 应用ID

@@ -1,6 +1,6 @@
 package com.yqboots.social.wechat.api.pay.data;
 
-import com.yqboots.social.wechat.api.annotation.*;
+import com.yqboots.social.wechat.api.annotation.OutTradeNo;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -10,7 +10,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import static com.yqboots.social.wechat.constants.WeChatConstants.*;
+import static com.yqboots.social.wechat.constants.WeChatConstants.FIELD_OUT_TRADE_NO;
+import static com.yqboots.social.wechat.constants.WeChatConstants.FIELD_ROOT_ELEMENT;
 
 @Data
 @NoArgsConstructor
