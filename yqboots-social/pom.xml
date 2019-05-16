@@ -25,6 +25,7 @@
     <module>yqboots-wechat-mock-server</module>
     <module>yqboots-wechat-starter-autoconfigure</module>
     <module>yqboots-facebook-starter-autoconfigure</module>
+    <module>yqboots-github-starter-autoconfigure</module>
   </modules>
 
   <dependencyManagement>

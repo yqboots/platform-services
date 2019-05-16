@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.security.Principal;
 
 @RestController(value = "facebookUserController")
+@RequestMapping(value = "/facebook")
 public class UserController {
     @RequestMapping("/user")
     public Principal user(Principal principal) {
