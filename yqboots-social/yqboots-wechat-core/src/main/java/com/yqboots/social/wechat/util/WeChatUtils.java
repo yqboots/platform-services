@@ -9,6 +9,9 @@ import java.util.Set;
 import java.util.SortedMap;
 
 public class WeChatUtils {
+    private static final String NONCE_STRING_CHAR_SET = "0123456789abcdefghijklmnopqrstuvwxyz";
+    private static final int NONCE_STRING_LENGTH = 32;
+
     /**
      * 是否签名正确,规则是:按参数名称a-z排序,遇到空值的参数不参加签名。
      */

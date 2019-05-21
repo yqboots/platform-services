@@ -33,6 +33,10 @@ public class WeChatProperties {
      */
     private String token;
     /**
+     * 是否处于测试环境
+     */
+    private Boolean testMode;
+    /**
      * 支付属性
      */
     private PayProperties pay;

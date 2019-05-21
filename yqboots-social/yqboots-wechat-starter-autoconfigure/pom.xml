@@ -14,6 +14,11 @@
 
   <dependencies>
     <dependency>
+      <groupId>com.yqboots.commerce</groupId>
+      <artifactId>yqboots-commerce-core</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
       <groupId>com.yqboots.social</groupId>
       <artifactId>yqboots-wechat-core</artifactId>
       <version>${project.version}</version>

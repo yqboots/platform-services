@@ -6,6 +6,14 @@ import com.yqboots.social.wechat.api.pay.data.*;
 
 public interface WeChatClient {
     /**
+     * Unified Order.
+     *
+     * @param request request
+     * @return response
+     */
+    UnifiedOrderResponse unifiedOrder(UnifiedOrderRequest request);
+
+    /**
      * Gets open id.
      *
      * @param request request

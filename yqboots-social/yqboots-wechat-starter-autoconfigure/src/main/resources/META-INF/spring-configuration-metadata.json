@@ -43,6 +43,12 @@
     },
     {
       "sourceType": "com.yqboots.social.wechat.WeChatProperties",
+      "name": "yqboots.social.wechat.test-mode",
+      "type": "java.lang.Boolean",
+      "description": "Test Mode"
+    },
+    {
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties",
       "name": "yqboots.social.wechat.token",
       "type": "java.lang.String",
       "description": "Token"

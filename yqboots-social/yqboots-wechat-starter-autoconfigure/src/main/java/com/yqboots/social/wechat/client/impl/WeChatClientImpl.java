@@ -34,6 +34,11 @@ public class WeChatClientImpl implements WeChatClient {
         this.jaxb2Marshaller = jaxb2Marshaller;
     }
 
+    @Override
+    public UnifiedOrderResponse unifiedOrder(UnifiedOrderRequest request) {
+        return invoke(request, properties.getPay().getUnifiedOrderUrl());
+    }
+
     /**
      * @inheritDoc
      */
