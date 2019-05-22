@@ -1,4 +1,4 @@
-package com.yqboots.commerce.product.entity;
+package com.yqboots.commerce.order.entity;
 
 import com.yqboots.commerce.user.entity.User;
 import lombok.Data;
@@ -7,19 +7,22 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractAuditable;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@Table(name = "products")
+@Table(name = "orders")
 @AssociationOverrides({
         @AssociationOverride(name = "createdBy", joinColumns = @JoinColumn(name = "CREATED_BY")),
         @AssociationOverride(name = "lastModifiedBy", joinColumns = @JoinColumn(name = "LAST_MODIFIED_BY"))
 })
-public abstract class AbstractProduct extends AbstractAuditable<User, Long> {
+public class Order extends AbstractAuditable<User, Long> {
     private String code;
-    private String name;
-    private String description;
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
+    @OneToMany(mappedBy = "order")
+    private List<OrderEntry> entries;
+    private Double totalPrice;
 }

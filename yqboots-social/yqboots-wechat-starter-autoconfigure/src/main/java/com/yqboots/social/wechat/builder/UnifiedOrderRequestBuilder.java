@@ -1,6 +1,6 @@
 package com.yqboots.social.wechat.builder;
 
-import com.yqboots.commerce.order.entity.AbstractOrder;
+import com.yqboots.commerce.order.entity.Order;
 import com.yqboots.social.wechat.WeChatProperties;
 import com.yqboots.social.wechat.api.pay.TradeType;
 import com.yqboots.social.wechat.api.pay.data.UnifiedOrderRequest;
@@ -16,7 +16,7 @@ public class UnifiedOrderRequestBuilder extends AbstractRequestBuilder<UnifiedOr
     }
 
     @Override
-    public UnifiedOrderRequest build(AbstractOrder order, String clientIP, TradeType tradeType) {
+    public UnifiedOrderRequest build(Order order, String clientIP, TradeType tradeType) {
         UnifiedOrderRequest result = new UnifiedOrderRequest();
 
         addParameter(WeChatConstants.FIELD_DEVICE_INFO, WeChatConstants.DEFAULT_DEVICE_INFO);

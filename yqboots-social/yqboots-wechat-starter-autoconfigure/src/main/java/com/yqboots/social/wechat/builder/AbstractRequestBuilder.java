@@ -1,6 +1,6 @@
 package com.yqboots.social.wechat.builder;
 
-import com.yqboots.commerce.order.entity.AbstractOrder;
+import com.yqboots.commerce.order.entity.Order;
 import com.yqboots.social.wechat.WeChatProperties;
 import com.yqboots.social.wechat.api.pay.TradeType;
 import com.yqboots.social.wechat.constants.WeChatConstants;
@@ -20,7 +20,7 @@ public abstract class AbstractRequestBuilder<T extends Serializable> {
         this.params.add(WeChatConstants.FIELD_MERCHANT_ID, properties.getPartnerId());
     }
 
-    protected abstract T build(AbstractOrder order, String clientIP, TradeType tradeType);
+    protected abstract T build(Order order, String clientIP, TradeType tradeType);
 
     void addParameter(String key, String value) {
         getParams().add(key, value);
