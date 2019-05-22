@@ -1,5 +1,6 @@
 package com.yqboots.social.wechat.api.pay.data;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.yqboots.social.wechat.api.annotation.AppId;
 import com.yqboots.social.wechat.api.annotation.MerchantId;
 import com.yqboots.social.wechat.api.annotation.NonceStr;
@@ -23,6 +24,7 @@ public abstract class AbstractWeChatPayData implements Serializable {
      */
     @AppId
     @XmlElement(name = FIELD_APPID)
+    @JsonProperty(value = FIELD_APPID)
     private String appId;
 
     /**
@@ -30,17 +32,20 @@ public abstract class AbstractWeChatPayData implements Serializable {
      */
     @MerchantId
     @XmlElement(name = FIELD_MERCHANT_ID)
+    @JsonProperty(value = FIELD_MERCHANT_ID)
     private String mchId;
     /**
      * 随机字符串
      */
     @NonceStr
     @XmlElement(name = FIELD_NONCE_STR)
+    @JsonProperty(value = FIELD_NONCE_STR)
     private String nonceStr;
     /**
      * 签名
      */
     @Sign
     @XmlElement(name = FIELD_SIGN)
+    @JsonProperty(value = FIELD_SIGN)
     private String sign;
 }

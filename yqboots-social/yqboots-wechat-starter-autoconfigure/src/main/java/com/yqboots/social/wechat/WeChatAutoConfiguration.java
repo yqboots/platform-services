@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
@@ -37,6 +38,7 @@ import java.security.cert.CertificateException;
 @Configuration
 @ConditionalOnWebApplication
 @EnableConfigurationProperties(WeChatProperties.class)
+@ComponentScan(basePackageClasses = {WeChatAutoConfiguration.class})
 public class WeChatAutoConfiguration {
     private static final Logger LOG = LoggerFactory.getLogger(WeChatAutoConfiguration.class);
 
@@ -47,7 +49,7 @@ public class WeChatAutoConfiguration {
         return new WeChatClientImpl(restTemplate(), properties, jaxb2Marshaller());
     }
 
-    @PostConstruct
+    // @PostConstruct
     protected void loadCert() throws KeyStoreException, IOException {
         File cert;
         try {
@@ -68,9 +70,10 @@ public class WeChatAutoConfiguration {
     }
 
     private RestTemplate restTemplate() throws Exception {
-        return new RestTemplate(new HttpComponentsClientHttpRequestFactory(
+        return new RestTemplate();
+        /*return new RestTemplate(new HttpComponentsClientHttpRequestFactory(
                 HttpClientUtils.acceptsTrustedCertsHttpClient(properties.getPartnerId()))
-        );
+        );*/
     }
 
     private Jaxb2Marshaller jaxb2Marshaller() {

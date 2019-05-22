@@ -10,7 +10,7 @@ yqboots:
       auth:
         access-token-url: https://api.weixin.qq.com/sns/oauth2/access_token
       pay:
-        cert-path: META-INF/resources/wxpay/cert/apiclient_cert.p12
+        cert-path: classpath:META-INF/resources/wxpay/cert/apiclient_cert.p12
         unified-order-url: https://api.mch.weixin.qq.com/pay/unifiedorder
         pay-notify-url: https://www.yqboots.com/wechat/pay/notify
         order-query-url: https://api.mch.weixin.qq.com/pay/orderquery

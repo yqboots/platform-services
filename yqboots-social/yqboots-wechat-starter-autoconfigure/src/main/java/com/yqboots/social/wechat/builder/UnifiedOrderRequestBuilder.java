@@ -1,24 +1,25 @@
 package com.yqboots.social.wechat.builder;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yqboots.commerce.order.entity.Order;
 import com.yqboots.social.wechat.WeChatProperties;
 import com.yqboots.social.wechat.api.pay.TradeType;
 import com.yqboots.social.wechat.api.pay.data.UnifiedOrderRequest;
 import com.yqboots.social.wechat.constants.WeChatConstants;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
+@Component
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class UnifiedOrderRequestBuilder extends AbstractRequestBuilder<UnifiedOrderRequest> {
-    @Value("yqboots.social.wechat.test-mode")
-    private Boolean testMode;
-
-    public UnifiedOrderRequestBuilder(WeChatProperties properties) {
+    public UnifiedOrderRequestBuilder(@Autowired WeChatProperties properties) {
         super(properties);
     }
 
     @Override
     public UnifiedOrderRequest build(Order order, String clientIP, TradeType tradeType) {
-        UnifiedOrderRequest result = new UnifiedOrderRequest();
-
         addParameter(WeChatConstants.FIELD_DEVICE_INFO, WeChatConstants.DEFAULT_DEVICE_INFO);
         addParameter(WeChatConstants.FIELD_NONCE_STR, getParams().generateNonce());
         addParameter(WeChatConstants.FIELD_BODY, order.getEntries().get(0).getProduct().getName());
@@ -40,6 +41,6 @@ public class UnifiedOrderRequestBuilder extends AbstractRequestBuilder<UnifiedOr
         addParameter(WeChatConstants.FIELD_RECEIPT, "");
         addParameter(WeChatConstants.FIELD_SIGN, generateSignature());
 
-        return result;
+        return convertToBean(new UnifiedOrderRequest());
     }
 }
