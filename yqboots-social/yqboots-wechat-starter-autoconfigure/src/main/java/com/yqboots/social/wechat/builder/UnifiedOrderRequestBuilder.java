@@ -1,6 +1,5 @@
 package com.yqboots.social.wechat.builder;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yqboots.commerce.order.entity.Order;
 import com.yqboots.social.wechat.WeChatProperties;
 import com.yqboots.social.wechat.api.pay.TradeType;
