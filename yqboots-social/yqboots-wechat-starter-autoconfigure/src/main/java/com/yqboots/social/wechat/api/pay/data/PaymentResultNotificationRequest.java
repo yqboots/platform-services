@@ -153,13 +153,29 @@ public class PaymentResultNotificationRequest extends AbstractWeChatPayData {
     /**
      * 代金券ID
      */
-    @XmlElement(name = "coupon_ids")
-    private List<String> couponIds; // coupon_id_$n
+    @XmlElement(name = "coupon_id_0")
+    private String couponId0; // coupon_id_$n
+    @XmlElement(name = "coupon_id_1")
+    private String couponId1; // coupon_id_$n
+    @XmlElement(name = "coupon_id_2")
+    private String couponId2; // coupon_id_$n
+    @XmlElement(name = "coupon_id_3")
+    private String couponId3; // coupon_id_$n
+    @XmlElement(name = "coupon_id_4")
+    private String couponId4; // coupon_id_$n
     /**
      * 代金券支付金额
      */
-    @XmlElement(name = "coupon_fees")
-    private List<Integer> couponFees; // coupon_fee_$n
+    @XmlElement(name = "coupon_fee_0")
+    private Integer couponFee0; // coupon_fee_$n
+    @XmlElement(name = "coupon_fee_1")
+    private Integer couponFee1; // coupon_fee_$n
+    @XmlElement(name = "coupon_fee_2")
+    private Integer couponFee2; // coupon_fee_$n
+    @XmlElement(name = "coupon_fee_3")
+    private Integer couponFee3; // coupon_fee_$n
+    @XmlElement(name = "coupon_fee_4")
+    private Integer couponFee4; // coupon_fee_$n
     /**
      * 微信支付订单号
      */

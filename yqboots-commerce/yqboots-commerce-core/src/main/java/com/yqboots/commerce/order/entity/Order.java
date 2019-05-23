@@ -19,6 +19,7 @@ import java.util.List;
         @AssociationOverride(name = "lastModifiedBy", joinColumns = @JoinColumn(name = "LAST_MODIFIED_BY"))
 })
 public class Order extends AbstractAuditable<User, Long> {
+    @Column(nullable = false, unique = true, length = 30)
     private String code;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;

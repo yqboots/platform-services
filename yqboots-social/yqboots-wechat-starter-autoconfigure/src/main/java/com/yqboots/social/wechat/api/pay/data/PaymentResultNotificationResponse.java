@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 import static com.yqboots.social.wechat.constants.WeChatConstants.*;
 
@@ -20,7 +21,12 @@ import static com.yqboots.social.wechat.constants.WeChatConstants.*;
 @NoArgsConstructor
 @XmlRootElement(name = FIELD_ROOT_ELEMENT)
 @XmlAccessorType(XmlAccessType.FIELD)
-public class PaymentResultNotificationResponse {
+public class PaymentResultNotificationResponse implements Serializable {
+    private PaymentResultNotificationResponse(String returnCode, String returnMsg) {
+        this.returnCode = returnCode;
+        this.returnMsg = returnMsg;
+    }
+
     /**
      * 返回状态码
      */
@@ -38,4 +44,12 @@ public class PaymentResultNotificationResponse {
     @Length(max = 128)
     @XmlElement(name = FIELD_RETURN_MSG)
     private String returnMsg;
+
+    public static PaymentResultNotificationResponse successResponse() {
+        return new PaymentResultNotificationResponse(RETURN_CODE_SUCCESS, RETURN_MSG_OK);
+    }
+
+    public static PaymentResultNotificationResponse failResponse() {
+        return null;
+    }
 }

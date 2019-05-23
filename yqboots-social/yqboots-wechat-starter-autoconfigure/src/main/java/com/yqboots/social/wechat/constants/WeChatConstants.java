@@ -15,6 +15,8 @@ public final class WeChatConstants {
     public static final String RETURN_CODE_SUCCESS = SUCCESS;
     public static final String RETURN_CODE_FAIL = FAIL;
 
+    public static final String RETURN_MSG_OK = "OK";
+
     public static final String RESULT_CODE_SUCCESS = SUCCESS;
     public static final String RESULT_CODE_FAIL = FAIL;
 

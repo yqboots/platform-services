@@ -5,7 +5,7 @@ import com.yqboots.commerce.order.entity.Order;
 import com.yqboots.social.wechat.WeChatProperties;
 import com.yqboots.social.wechat.api.pay.TradeType;
 import com.yqboots.social.wechat.constants.WeChatConstants;
-import com.yqboots.social.wechat.support.WeChatPayParameters;
+import com.yqboots.social.wechat.builder.support.WeChatPayParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;

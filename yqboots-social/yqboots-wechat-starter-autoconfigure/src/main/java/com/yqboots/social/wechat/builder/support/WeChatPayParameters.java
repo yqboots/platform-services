@@ -1,4 +1,4 @@
-package com.yqboots.social.wechat.support;
+package com.yqboots.social.wechat.builder.support;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FilenameUtils;
