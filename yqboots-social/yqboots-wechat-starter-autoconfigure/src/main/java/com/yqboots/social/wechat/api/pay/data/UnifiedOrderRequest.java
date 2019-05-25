@@ -53,14 +53,14 @@ public class UnifiedOrderRequest extends AbstractWeChatPayData {
     @Length(max = 32)
     @XmlElement(name = FIELD_DEVICE_INFO)
     @JsonProperty(value = FIELD_DEVICE_INFO)
-    private String deviceInfo = DEFAULT_DEVICE_INFO;
+    private String deviceInfo;
     /**
      * 签名类型
      */
     @Length(max = 32)
     @XmlElement(name = FIELD_SIGN_TYPE)
     @JsonProperty(value = FIELD_SIGN_TYPE)
-    private String signType = SignType.MD5.getCode();
+    private String signType;
     /**
      * 商品描述
      */
@@ -97,7 +97,7 @@ public class UnifiedOrderRequest extends AbstractWeChatPayData {
     @Length(max = 16)
     @XmlElement(name = FIELD_FEE_TYPE)
     @JsonProperty(value = FIELD_FEE_TYPE)
-    private String feeType = FeeType.CNY.name();
+    private String feeType;
     /**
      * 总金额 - 订单总金额，单位为分
      */
@@ -105,7 +105,7 @@ public class UnifiedOrderRequest extends AbstractWeChatPayData {
     @Min(0)
     @XmlElement(name = FIELD_TOTAL_FEE)
     @JsonProperty(value = FIELD_TOTAL_FEE)
-    private Integer totalFee = 0;
+    private Integer totalFee;
     /**
      * 终端IP - 支持IPV4和IPV6两种格式的IP地址。调用微信支付API的机器IP
      */
@@ -158,7 +158,7 @@ public class UnifiedOrderRequest extends AbstractWeChatPayData {
     @Length(max = 32)
     @XmlElement(name = FIELD_LIMIT_PAY)
     @JsonProperty(value = FIELD_LIMIT_PAY)
-    private String limitPay = LimitPay.no_credit.name();
+    private String limitPay;
     /**
      * 开发票入口开放标识 - Y，传入Y时，支付成功消息和支付详情页将出现开票入口。<br/>
      * 需要在微信支付商户平台或微信公众平台开通电子发票功能，传此字段才可生效

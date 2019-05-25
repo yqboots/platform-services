@@ -2,6 +2,9 @@ package com.yqboots.social.wechat.builder;
 
 import com.yqboots.commerce.order.entity.Order;
 import com.yqboots.social.wechat.WeChatProperties;
+import com.yqboots.social.wechat.api.pay.FeeType;
+import com.yqboots.social.wechat.api.pay.LimitPay;
+import com.yqboots.social.wechat.api.pay.SignType;
 import com.yqboots.social.wechat.api.pay.TradeType;
 import com.yqboots.social.wechat.api.pay.data.UnifiedOrderRequest;
 import com.yqboots.social.wechat.constants.WeChatConstants;
@@ -30,13 +33,15 @@ public class UnifiedOrderRequestBuilder extends AbstractRequestBuilder<UnifiedOr
         } else {
             addParameter(WeChatConstants.FIELD_TOTAL_FEE, String.valueOf(order.getTotalPrice() * 100));
         }
+        addParameter(WeChatConstants.FIELD_FEE_TYPE, FeeType.CNY.name());
+        addParameter(WeChatConstants.FIELD_SIGN_TYPE, SignType.MD5.getCode());
         addParameter(WeChatConstants.FIELD_SPBILL_CREATE_IP, clientIP);
         addParameter(WeChatConstants.FIELD_TIME_START, "");
         addParameter(WeChatConstants.FIELD_TIME_EXPIRE, "");
         addParameter(WeChatConstants.FIELD_GOODS_TAG, "");
         addParameter(WeChatConstants.FIELD_NOTIFY_URL, getProperties().getPay().getPayNotifyUrl());
         addParameter(WeChatConstants.FIELD_TRADE_TYPE, tradeType.name());
-        addParameter(WeChatConstants.FIELD_LIMIT_PAY, "");
+        addParameter(WeChatConstants.FIELD_LIMIT_PAY, LimitPay.no_credit.name());
         addParameter(WeChatConstants.FIELD_RECEIPT, "");
         addParameter(WeChatConstants.FIELD_SIGN, generateSignature());
 

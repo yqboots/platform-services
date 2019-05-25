@@ -1,10 +1,10 @@
 yqboots:
   social:
     wechat:
-      app-id: XXXXXXXXXX
-      app-secret: XXXXXXXXXX
-      partner-id: XXXXXXXXXX
-      partner-key: XXXXXXXXXX
+      app-id: wxe477169329e9e2ae
+      app-secret: 6b691fcad677f86ea2583d18013be37d
+      partner-id: 1536184451
+      partner-key: 1qazxsw23edcvfr45tgbnhy67ujmki89
       token: XXXXXXXXXX
       test-mode: true
       auth:
