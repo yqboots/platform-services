@@ -1,12 +1,12 @@
-package com.yqboots.social.wechat.builder;
+package com.yqboots.social.wechat.client.builder;
 
 import com.yqboots.commerce.order.entity.Order;
 import com.yqboots.social.wechat.WeChatProperties;
 import com.yqboots.social.wechat.api.pay.FeeType;
 import com.yqboots.social.wechat.api.pay.LimitPay;
 import com.yqboots.social.wechat.api.pay.SignType;
-import com.yqboots.social.wechat.api.pay.TradeType;
 import com.yqboots.social.wechat.api.pay.data.UnifiedOrderRequest;
+import com.yqboots.social.wechat.client.builder.support.RequestBuilderParameters;
 import com.yqboots.social.wechat.constants.WeChatConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
@@ -21,9 +21,11 @@ public class UnifiedOrderRequestBuilder extends AbstractRequestBuilder<UnifiedOr
     }
 
     @Override
-    public UnifiedOrderRequest build(Order order, String clientIP, TradeType tradeType) {
+    public UnifiedOrderRequest build(RequestBuilderParameters builderParameters) {
         addParameter(WeChatConstants.FIELD_DEVICE_INFO, WeChatConstants.DEFAULT_DEVICE_INFO);
         addParameter(WeChatConstants.FIELD_NONCE_STR, getParams().generateNonce());
+
+        Order order = builderParameters.getOrder();
         addParameter(WeChatConstants.FIELD_BODY, order.getEntries().get(0).getProduct().getName());
         addParameter(WeChatConstants.FIELD_DETAIL, "");
         addParameter(WeChatConstants.FIELD_ATTACH, "");
@@ -35,12 +37,12 @@ public class UnifiedOrderRequestBuilder extends AbstractRequestBuilder<UnifiedOr
         }
         addParameter(WeChatConstants.FIELD_FEE_TYPE, FeeType.CNY.name());
         addParameter(WeChatConstants.FIELD_SIGN_TYPE, SignType.MD5.getCode());
-        addParameter(WeChatConstants.FIELD_SPBILL_CREATE_IP, clientIP);
+        addParameter(WeChatConstants.FIELD_SPBILL_CREATE_IP, builderParameters.getClientIP());
         addParameter(WeChatConstants.FIELD_TIME_START, "");
         addParameter(WeChatConstants.FIELD_TIME_EXPIRE, "");
         addParameter(WeChatConstants.FIELD_GOODS_TAG, "");
         addParameter(WeChatConstants.FIELD_NOTIFY_URL, getProperties().getPay().getPayNotifyUrl());
-        addParameter(WeChatConstants.FIELD_TRADE_TYPE, tradeType.name());
+        addParameter(WeChatConstants.FIELD_TRADE_TYPE, builderParameters.getTradeType().name());
         addParameter(WeChatConstants.FIELD_LIMIT_PAY, LimitPay.no_credit.name());
         addParameter(WeChatConstants.FIELD_RECEIPT, "");
         addParameter(WeChatConstants.FIELD_SIGN, generateSignature());

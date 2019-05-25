@@ -1,11 +1,10 @@
-package com.yqboots.social.wechat.builder;
+package com.yqboots.social.wechat.client.builder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.yqboots.commerce.order.entity.Order;
 import com.yqboots.social.wechat.WeChatProperties;
-import com.yqboots.social.wechat.api.pay.TradeType;
+import com.yqboots.social.wechat.client.builder.support.RequestBuilderParameters;
+import com.yqboots.social.wechat.client.builder.support.WeChatPayParameters;
 import com.yqboots.social.wechat.constants.WeChatConstants;
-import com.yqboots.social.wechat.builder.support.WeChatPayParameters;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
@@ -24,10 +23,14 @@ public abstract class AbstractRequestBuilder<T extends Serializable> {
         this.params.add(WeChatConstants.FIELD_MERCHANT_ID, properties.getPartnerId());
     }
 
-    protected abstract T build(Order order, String clientIP, TradeType tradeType);
+    protected abstract T build(RequestBuilderParameters builderParameters);
 
     void addParameter(String key, String value) {
         getParams().add(key, value);
+    }
+
+    void removeParameter(String key) {
+        getParams().remove(key);
     }
 
     @SuppressWarnings("unchecked")

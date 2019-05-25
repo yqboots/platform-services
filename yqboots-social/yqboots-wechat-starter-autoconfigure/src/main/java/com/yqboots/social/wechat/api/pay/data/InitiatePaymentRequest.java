@@ -45,7 +45,7 @@ public class InitiatePaymentRequest implements Serializable {
     @NonNull
     @NotEmpty
     @Length(max = 32)
-    @JsonProperty("prepayid")
+    @JsonProperty(FIELD_PREPAYID)
     private String prepayId;
     @NonNull
     @NotEmpty

@@ -68,6 +68,7 @@ public final class WeChatConstants {
     public static final String FIELD_PACKAGE = "package";
     public static final String FIELD_PARTNER_ID = "partnerid";
     public static final String FIELD_PREPAY_ID = "prepay_id";
+    public static final String FIELD_PREPAYID = "prepayid";
     public static final String FIELD_RECEIPT = "receipt";
     public static final String FIELD_RESULT_CODE = "result_code";
     public static final String FIELD_RESULT_MSG = "result_msg";

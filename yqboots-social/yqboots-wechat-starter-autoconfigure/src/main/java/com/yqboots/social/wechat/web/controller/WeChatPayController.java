@@ -1,14 +1,16 @@
 package com.yqboots.social.wechat.web.controller;
 
+import com.yqboots.social.wechat.api.pay.TradeType;
+import com.yqboots.social.wechat.api.pay.data.InitiatePaymentRequest;
 import com.yqboots.social.wechat.api.pay.data.PaymentResultNotificationRequest;
 import com.yqboots.social.wechat.api.pay.data.PaymentResultNotificationResponse;
 import com.yqboots.social.wechat.service.WeChatPayService;
+import com.yqboots.social.wechat.web.util.WeChatWebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 微信支付REST API
@@ -17,6 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/wechat/pay")
 public class WeChatPayController {
     private WeChatPayService weChatPayService;
+
+    @RequestMapping(value = {"/initiate/{orderCode}"}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    public InitiatePaymentRequest getInitiatePaymentRequest(HttpServletRequest request,
+                                                            @PathVariable String orderCode,
+                                                            @RequestParam String tradeType) {
+        return weChatPayService.getInitiatePaymentRequest(
+                orderCode,
+                WeChatWebUtils.getIPAddress(request),
+                TradeType.valueOf(tradeType));
+    }
 
     @RequestMapping(value = "/payment/notify", method = RequestMethod.POST, produces = {MediaType.APPLICATION_XML_VALUE})
     public PaymentResultNotificationResponse notifyPaymentResult(@RequestBody PaymentResultNotificationRequest request) {

@@ -1,4 +1,4 @@
-package com.yqboots.social.wechat.builder.support;
+package com.yqboots.social.wechat.client.builder.support;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -30,6 +30,10 @@ public class WeChatPayParameters {
         if (StringUtils.isNotEmpty(value) && StringUtils.isNotEmpty(name)) {
             parameters.put(name, value);
         }
+    }
+
+    public void remove(final String name) {
+        parameters.remove(name);
     }
 
     /**

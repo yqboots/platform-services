@@ -1,4 +1,4 @@
-package com.yqboots.social.wechat.builder;
+package com.yqboots.social.wechat.client.builder;
 
 import com.yqboots.commerce.order.entity.Order;
 import com.yqboots.commerce.order.entity.OrderEntry;
@@ -6,6 +6,7 @@ import com.yqboots.commerce.product.entity.Product;
 import com.yqboots.social.wechat.WeChatApplication;
 import com.yqboots.social.wechat.api.pay.TradeType;
 import com.yqboots.social.wechat.api.pay.data.UnifiedOrderRequest;
+import com.yqboots.social.wechat.client.builder.support.RequestBuilderParameters;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.junit.Before;
@@ -45,7 +46,11 @@ public class UnifiedOrderRequestBuilderTest {
 
     @Test
     public void build() {
-        UnifiedOrderRequest request = builder.build(order, "0.0.0.0", TradeType.APP);
+        UnifiedOrderRequest request = builder.build(new RequestBuilderParameters()
+                .setOrder(order)
+                .setClientIP("0.0.0.0")
+                .setTradeType(TradeType.APP)
+        );
 
         LOG.info(ToStringBuilder.reflectionToString(request, ToStringStyle.JSON_STYLE));
     }
