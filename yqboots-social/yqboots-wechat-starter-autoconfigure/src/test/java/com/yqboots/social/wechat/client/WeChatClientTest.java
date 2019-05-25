@@ -8,8 +8,10 @@ import com.yqboots.social.wechat.api.pay.TradeType;
 import com.yqboots.social.wechat.api.pay.data.UnifiedOrderRequest;
 import com.yqboots.social.wechat.api.pay.data.UnifiedOrderResponse;
 import com.yqboots.social.wechat.builder.UnifiedOrderRequestBuilder;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -56,6 +58,8 @@ public class WeChatClientTest {
 
         UnifiedOrderResponse response = weChatClient.unifiedOrder(request);
 
-        LOG.debug(ToStringBuilder.reflectionToString(response, ToStringStyle.JSON_STYLE));
+        LOG.info(ToStringBuilder.reflectionToString(response, ToStringStyle.JSON_STYLE));
+
+        Assert.assertTrue(StringUtils.isNotEmpty(response.getPrepayId()));
     }
 }

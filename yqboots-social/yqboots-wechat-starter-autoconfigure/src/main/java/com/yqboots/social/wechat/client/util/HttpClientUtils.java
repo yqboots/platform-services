@@ -10,16 +10,28 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.ssl.SSLContextBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.ResourceUtils;
 
 import javax.net.ssl.SSLContext;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.security.*;
+import java.security.cert.CertificateException;
 
 public class HttpClientUtils {
-    public static CloseableHttpClient acceptsTrustedCertsHttpClient(String partnerId)
-            throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException, UnrecoverableKeyException {
+    private static final Logger LOG = LoggerFactory.getLogger(HttpClientUtils.class);
+
+    public static CloseableHttpClient acceptsTrustedCertsHttpClient(String certPath, String partnerId)
+            throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException, UnrecoverableKeyException, IOException {
         HttpClientBuilder b = HttpClientBuilder.create();
 
         KeyStore keyStore = KeyStore.getInstance("PKCS12");
+        loadCert(keyStore, certPath, partnerId);
+
         SSLContext sslContext = new SSLContextBuilder().loadKeyMaterial(keyStore, partnerId.toCharArray()).build();
         b.setSSLContext(sslContext);
 
@@ -44,5 +56,24 @@ public class HttpClientUtils {
 
         // finally, build the HttpClient;
         return b.build();
+    }
+
+    private static void loadCert(KeyStore keyStore, String certPath, String partnerId)
+            throws IOException {
+        File cert;
+        try {
+            cert = ResourceUtils.getFile(certPath);
+        } catch (FileNotFoundException e) {
+            LOG.warn("wechat cert not found, some apis may not work", e);
+            return;
+        }
+
+        try (
+                FileInputStream fis = new FileInputStream(cert);
+        ) {
+            keyStore.load(fis, partnerId.toCharArray());
+        } catch (CertificateException | NoSuchAlgorithmException e) {
+            LOG.error(e.getMessage(), e);
+        }
     }
 }
