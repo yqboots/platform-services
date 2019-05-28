@@ -11,6 +11,6 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@DiscriminatorValue("E")
+@DiscriminatorValue("EMPLOYEE")
 public class Employee extends User {
 }

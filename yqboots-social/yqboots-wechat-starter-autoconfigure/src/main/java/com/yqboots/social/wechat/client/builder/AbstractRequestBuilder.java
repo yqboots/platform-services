@@ -16,7 +16,7 @@ public abstract class AbstractRequestBuilder<T extends Serializable> {
 
     private ObjectMapper objectMapper;
 
-    AbstractRequestBuilder(WeChatProperties properties) {
+    public AbstractRequestBuilder(WeChatProperties properties) {
         this.properties = properties;
         this.params = new WeChatPayParameters();
         this.params.add(WeChatConstants.FIELD_APPID, properties.getAppId());

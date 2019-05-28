@@ -14,6 +14,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "orders")
+@DiscriminatorColumn(name = "TYPE")
 @AssociationOverrides({
         @AssociationOverride(name = "createdBy", joinColumns = @JoinColumn(name = "CREATED_BY")),
         @AssociationOverride(name = "lastModifiedBy", joinColumns = @JoinColumn(name = "LAST_MODIFIED_BY"))

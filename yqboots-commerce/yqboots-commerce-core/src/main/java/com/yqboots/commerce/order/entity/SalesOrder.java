@@ -1,4 +1,4 @@
-package com.yqboots.commerce.user.entity;
+package com.yqboots.commerce.order.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,6 +11,6 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@DiscriminatorValue("CUSTOMER")
-public class Customer extends User {
+@DiscriminatorValue("SALES")
+public class SalesOrder extends Order {
 }
