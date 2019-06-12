@@ -24,7 +24,7 @@ public class InitiatePaymentRequestBuilderTest {
     @Test
     public void build() {
         InitiatePaymentRequest request = builder.build(new RequestBuilderParameters()
-                .setPrepayId("prepayID001"));
+                .setPrepayId("wx130045194745681add0a93881956491000"));
 
         LOG.info(ToStringBuilder.reflectionToString(request, ToStringStyle.JSON_STYLE));
     }

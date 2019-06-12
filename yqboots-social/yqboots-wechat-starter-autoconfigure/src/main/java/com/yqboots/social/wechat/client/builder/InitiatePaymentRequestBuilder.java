@@ -23,7 +23,7 @@ public class InitiatePaymentRequestBuilder extends AbstractRequestBuilder<Initia
         addParameter(WeChatConstants.FIELD_PARTNER_ID, getProperties().getPartnerId());
         addParameter(WeChatConstants.FIELD_PREPAYID, builderParameters.getPrepayId());
         addParameter(WeChatConstants.FIELD_PACKAGE, WeChatConstants.PACKAGE);
-        addParameter(WeChatConstants.FIELD_NONCE_STR, getParams().generateNonce());
+        addParameter(WeChatConstants.FIELD_NONCESTR, getParams().generateNonce());
         addParameter(WeChatConstants.FIELD_TIMESTAMP, String.valueOf(System.currentTimeMillis() / DateUtils.MILLIS_PER_SECOND));
         addParameter(WeChatConstants.FIELD_SIGN, generateSignature());
 

@@ -35,7 +35,7 @@ public class InitiatePaymentRequest implements Serializable {
     @NonNull
     @NotEmpty
     @Length(max = 32)
-    @JsonProperty(FIELD_NONCE_STR)
+    @JsonProperty(FIELD_NONCESTR)
     private String nonceStr;
     @NonNull
     @NotEmpty

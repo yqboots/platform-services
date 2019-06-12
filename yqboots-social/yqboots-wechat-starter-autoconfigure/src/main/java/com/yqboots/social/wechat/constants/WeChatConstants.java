@@ -54,6 +54,7 @@ public final class WeChatConstants {
     public static final String FIELD_IS_SUBSCRIBE = "is_subscribe";
     public static final String FIELD_LIMIT_PAY = "limit_pay";
     public static final String FIELD_MERCHANT_ID = "mch_id";
+    public static final String FIELD_NONCESTR = "noncestr";
     public static final String FIELD_NONCE_STR = "nonce_str";
     public static final String FIELD_NOTIFY_URL = "notify_url";
     public static final String FIELD_OPEN_ID = "openid";
