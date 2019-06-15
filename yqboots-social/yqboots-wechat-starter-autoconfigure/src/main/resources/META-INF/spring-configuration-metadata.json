@@ -85,7 +85,7 @@
     },
     {
       "sourceType": "com.yqboots.social.wechat.WeChatProperties#PayProperties",
-      "name": "yqboots.social.wechat.pay.close-order-url",
+      "name": "yqboots.social.wechat.pay.order-close-url",
       "type": "java.lang.String",
       "description": "Close Order URL"
     },

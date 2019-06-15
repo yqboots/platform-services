@@ -20,14 +20,18 @@ import javax.servlet.http.HttpServletRequest;
 public class WeChatPayController {
     private WeChatPayService weChatPayService;
 
-    @RequestMapping(value = {"/initiate/{orderCode}"}, produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+    @RequestMapping(
+            value = {"/initiate/{orderCode}/{tradeType}"},
+            produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}
+    )
     public InitiatePaymentRequest getInitiatePaymentRequest(HttpServletRequest request,
                                                             @PathVariable String orderCode,
-                                                            @RequestParam String tradeType) {
+                                                            @PathVariable String tradeType) {
         return weChatPayService.getInitiatePaymentRequest(
                 orderCode,
                 WeChatWebUtils.getIPAddress(request),
-                TradeType.valueOf(tradeType));
+                TradeType.valueOf(tradeType)
+        );
     }
 
     @RequestMapping(value = "/payment/notify", method = RequestMethod.POST, produces = {MediaType.APPLICATION_XML_VALUE})

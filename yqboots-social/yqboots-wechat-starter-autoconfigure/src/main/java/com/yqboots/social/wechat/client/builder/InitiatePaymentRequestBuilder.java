@@ -25,6 +25,7 @@ public class InitiatePaymentRequestBuilder extends AbstractRequestBuilder<Initia
         addParameter(WeChatConstants.FIELD_PACKAGE, WeChatConstants.PACKAGE);
         addParameter(WeChatConstants.FIELD_NONCESTR, getParams().generateNonce());
         addParameter(WeChatConstants.FIELD_TIMESTAMP, String.valueOf(System.currentTimeMillis() / DateUtils.MILLIS_PER_SECOND));
+        // getParams().generateXml();
         addParameter(WeChatConstants.FIELD_SIGN, generateSignature());
 
         return convertToBean(new InitiatePaymentRequest());
