@@ -1,3 +1,4 @@
+
 yqboots:
   social:
     wechat:
@@ -22,3 +23,6 @@ yqboots:
         download-fund-flow-url: https://api.mch.weixin.qq.com/pay/downloadfundflow
         report-url: https://api.mch.weixin.qq.com/payitil/report
         batch-query-comment-url: https://api.mch.weixin.qq.com/billcommentsp/batchquerycomment
+spring:
+  jpa:
+    show-sql: true

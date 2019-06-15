@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 @Entity
 @DiscriminatorValue("VP")
 public class VariantProduct extends AbstractProduct {
-    @ManyToOne(optional = false)
+    @ManyToOne
     @JoinColumn(name = "BASE_PRODUCT")
     private Product baseProduct;
 }

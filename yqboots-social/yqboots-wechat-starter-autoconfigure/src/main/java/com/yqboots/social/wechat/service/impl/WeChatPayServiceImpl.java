@@ -58,7 +58,7 @@ public class WeChatPayServiceImpl implements WeChatPayService, ApplicationContex
         UnifiedOrderResponse response = weChatClient.unifiedOrder(builder.build(
                 new RequestBuilderParameters()
                         .setOrder(order)
-                        .setClientIP(ipAddress)
+                        .setClientIP("0.0.0.0")
                         .setTradeType(tradeType)
         ));
 

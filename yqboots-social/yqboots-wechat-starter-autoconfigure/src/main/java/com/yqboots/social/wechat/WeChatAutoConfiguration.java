@@ -13,8 +13,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.client.RestTemplate;
+
+import java.nio.charset.StandardCharsets;
 
 /**
  * WeChat auto configuration
@@ -35,11 +38,15 @@ public class WeChatAutoConfiguration {
     }
 
     private RestTemplate restTemplate() throws Exception {
-        return new RestTemplate(new HttpComponentsClientHttpRequestFactory(
+        RestTemplate bean = new RestTemplate(new HttpComponentsClientHttpRequestFactory(
                 HttpClientUtils.acceptsTrustedCertsHttpClient(
                         properties.getPay().getCertPath(),
                         properties.getPartnerId())
         ));
+        // 解决中文乱码的问题
+        bean.getMessageConverters().set(1, new StringHttpMessageConverter(StandardCharsets.UTF_8));
+
+        return bean;
     }
 
     private Jaxb2Marshaller jaxb2Marshaller() {

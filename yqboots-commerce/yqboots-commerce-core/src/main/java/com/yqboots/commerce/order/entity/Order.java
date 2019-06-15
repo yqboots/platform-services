@@ -24,7 +24,7 @@ public class Order extends AbstractAuditable<User, Long> {
     private String code;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
-    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<OrderEntry> entries;
     private Double totalPrice;
 }
