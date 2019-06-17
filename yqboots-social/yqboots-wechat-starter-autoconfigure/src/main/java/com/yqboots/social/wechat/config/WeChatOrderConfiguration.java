@@ -33,7 +33,7 @@ public class WeChatOrderConfiguration {
 
             Order order = new Order();
             order.setStatus(OrderStatus.PENDING_PAYMENT);
-            order.setCode("D00000001");
+            order.setCode("D00000002");
             order.setTotalPrice(100D);
 
             List<OrderEntry> entries = new ArrayList<>();

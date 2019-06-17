@@ -56,5 +56,5 @@ public class InitiatePaymentRequest implements Serializable {
     @NotEmpty
     @Length(max = 10)
     @JsonProperty(FIELD_TIMESTAMP)
-    private String timestamp;
+    private long timestamp;
 }
