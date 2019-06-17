@@ -4,6 +4,8 @@ import com.yqboots.social.wechat.api.auth.data.OpenIdRequest;
 import com.yqboots.social.wechat.api.auth.data.OpenIdResponse;
 import com.yqboots.social.wechat.api.pay.data.*;
 
+import java.io.IOException;
+
 public interface WeChatClient {
     /**
      * Unified Order.
@@ -19,7 +21,7 @@ public interface WeChatClient {
      * @param request request
      * @return open id
      */
-    OpenIdResponse getOpenID(OpenIdRequest request);
+    OpenIdResponse getOpenID(OpenIdRequest request) throws IOException;
 
     /**
      * 申请退款

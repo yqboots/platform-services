@@ -1,5 +1,6 @@
 package com.yqboots.social.wechat.client.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yqboots.social.wechat.WeChatProperties;
 import com.yqboots.social.wechat.api.auth.data.OpenIdRequest;
 import com.yqboots.social.wechat.api.auth.data.OpenIdResponse;
@@ -14,7 +15,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.xml.transform.StringResult;
 import org.springframework.xml.transform.StringSource;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -25,13 +28,16 @@ public class WeChatClientImpl implements WeChatClient {
     private final WeChatProperties properties;
 
     private final Jaxb2Marshaller jaxb2Marshaller;
+    private final ObjectMapper objectMapper;
 
     public WeChatClientImpl(final RestTemplate restTemplate,
                             final WeChatProperties properties,
-                            final Jaxb2Marshaller jaxb2Marshaller) {
+                            final Jaxb2Marshaller jaxb2Marshaller,
+                            final ObjectMapper objectMapper) {
         this.restTemplate = restTemplate;
         this.properties = properties;
         this.jaxb2Marshaller = jaxb2Marshaller;
+        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -43,20 +49,29 @@ public class WeChatClientImpl implements WeChatClient {
      * @inheritDoc
      */
     @Override
-    public OpenIdResponse getOpenID(OpenIdRequest request) {
+    public OpenIdResponse getOpenID(OpenIdRequest request) throws IOException {
         Map<String, Object> params = new HashMap<>();
         params.put("appid", request.getAppId());
         params.put("secret", request.getAppSecret());
         params.put("code", request.getCode());
         params.put("grant_type", request.getGrantType());
 
-        ResponseEntity<OpenIdResponse> response = this.restTemplate.getForEntity(
-                properties.getAuth().getAccessTokenUrl(),
-                OpenIdResponse.class,
+        String url = properties.getAuth().getAccessTokenUrl() +
+                "?appid={appid}&secret={secret}&code={code}&grant_type={grant_type}";
+        ResponseEntity<String> response = this.restTemplate.getForEntity(
+                url,
+                String.class,
                 params
         );
 
-        return Objects.requireNonNull(response.getBody());
+        if (response.getBody() != null) {
+            return objectMapper.readValue(
+                    response.getBody().getBytes(StandardCharsets.UTF_8),
+                    OpenIdResponse.class
+            );
+        }
+
+        return null;
     }
 
     /**
@@ -111,6 +126,14 @@ public class WeChatClientImpl implements WeChatClient {
         HttpHeaders headers = new HttpHeaders();
         headers.set("X-COM-PERSIST", "true");
         headers.set("Content-Type", MediaType.APPLICATION_XML_VALUE);
+
+        return headers;
+    }
+
+    private static HttpHeaders getCommonJsonHeaders() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("X-COM-PERSIST", "true");
+        headers.set("Content-Type", MediaType.APPLICATION_JSON_VALUE);
 
         return headers;
     }

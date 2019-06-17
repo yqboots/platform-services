@@ -1,5 +1,6 @@
 package com.yqboots.social.wechat;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yqboots.social.wechat.api.auth.data.OpenIdRequest;
 import com.yqboots.social.wechat.api.auth.data.OpenIdResponse;
 import com.yqboots.social.wechat.api.pay.data.*;
@@ -33,8 +34,8 @@ public class WeChatAutoConfiguration {
     private WeChatProperties properties;
 
     @Bean
-    public WeChatClient weChatClient() throws Exception {
-        return new WeChatClientImpl(restTemplate(), properties, jaxb2Marshaller());
+    public WeChatClient weChatClient(ObjectMapper objectMapper) throws Exception {
+        return new WeChatClientImpl(restTemplate(), properties, jaxb2Marshaller(), objectMapper);
     }
 
     private RestTemplate restTemplate() throws Exception {
