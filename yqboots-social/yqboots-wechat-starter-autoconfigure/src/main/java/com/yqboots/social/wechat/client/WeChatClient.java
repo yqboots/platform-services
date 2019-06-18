@@ -1,8 +1,6 @@
 package com.yqboots.social.wechat.client;
 
-import com.yqboots.social.wechat.api.auth.data.GetAccessTokenRequest;
-import com.yqboots.social.wechat.api.auth.data.GetAccessTokenResponse;
-import com.yqboots.social.wechat.api.auth.data.RefreshAccessTokenRequest;
+import com.yqboots.social.wechat.api.auth.data.*;
 import com.yqboots.social.wechat.api.pay.data.*;
 
 import java.io.IOException;
@@ -21,6 +19,7 @@ public interface WeChatClient {
      *
      * @param request request
      * @return access token & open id
+     * @throws IOException if can not parse the response
      */
     GetAccessTokenResponse getAccessToken(GetAccessTokenRequest request) throws IOException;
 
@@ -29,8 +28,25 @@ public interface WeChatClient {
      *
      * @param request request
      * @return access token & open id
+     * @throws IOException if can not parse the response
      */
     GetAccessTokenResponse getRefreshedAccessToken(RefreshAccessTokenRequest request) throws IOException;
+
+    /**
+     * @param request request
+     * @return token valid response
+     * @throws IOException if can not parse the response
+     */
+    CheckAccessTokenValidResponse getCheckAccessTokenValid(CheckAccessTokenValidRequest request) throws IOException;
+
+    /**
+     * 获取当前登录用户信息
+     *
+     * @param request request
+     * @return user info
+     * @throws IOException if can not parse the response
+     */
+    GetUserInfoResponse getCurrentUserInfo(GetUserInfoRequest request) throws IOException;
 
     /**
      * 申请退款

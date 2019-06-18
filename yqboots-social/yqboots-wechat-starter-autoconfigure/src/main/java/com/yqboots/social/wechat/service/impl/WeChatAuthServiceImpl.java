@@ -1,8 +1,10 @@
 package com.yqboots.social.wechat.service.impl;
 
 import com.yqboots.social.wechat.api.auth.data.GetAccessTokenResponse;
+import com.yqboots.social.wechat.api.auth.data.GetUserInfoResponse;
 import com.yqboots.social.wechat.client.WeChatClient;
 import com.yqboots.social.wechat.client.builder.GetAccessTokenRequestBuilder;
+import com.yqboots.social.wechat.client.builder.GetUserInfoRequestBuilder;
 import com.yqboots.social.wechat.client.builder.RefreshAccessTokenRequestBuilder;
 import com.yqboots.social.wechat.service.WeChatAuthService;
 import org.springframework.beans.BeansException;
@@ -37,6 +39,12 @@ public class WeChatAuthServiceImpl implements WeChatAuthService, ApplicationCont
     public GetAccessTokenResponse getRefreshedAccessToken(String refreshToken) throws IOException {
         RefreshAccessTokenRequestBuilder builder = applicationContext.getBean(RefreshAccessTokenRequestBuilder.class);
         return weChatClient.getRefreshedAccessToken(builder.build(refreshToken));
+    }
+
+    @Override
+    public GetUserInfoResponse getCurrentUserInfo() throws IOException {
+        GetUserInfoRequestBuilder builder = applicationContext.getBean(GetUserInfoRequestBuilder.class);
+        return weChatClient.getCurrentUserInfo(builder.build());
     }
 
     @Override

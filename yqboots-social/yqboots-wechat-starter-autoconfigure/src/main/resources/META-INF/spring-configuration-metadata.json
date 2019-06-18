@@ -61,6 +61,18 @@
     },
     {
       "sourceType": "com.yqboots.social.wechat.WeChatProperties#AuthProperties",
+      "name": "yqboots.social.wechat.auth.check-token-valid-url",
+      "type": "java.lang.String",
+      "description": "Check token valid or not URL"
+    },
+    {
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties#AuthProperties",
+      "name": "yqboots.social.wechat.auth.get-user-info-url",
+      "type": "java.lang.String",
+      "description": "Get user info URL"
+    },
+    {
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties#AuthProperties",
       "name": "yqboots.social.wechat.auth.refresh-token-url",
       "type": "java.lang.String",
       "description": "Refresh Token URL"

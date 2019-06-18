@@ -2,9 +2,7 @@ package com.yqboots.social.wechat.client.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yqboots.social.wechat.WeChatProperties;
-import com.yqboots.social.wechat.api.auth.data.GetAccessTokenRequest;
-import com.yqboots.social.wechat.api.auth.data.GetAccessTokenResponse;
-import com.yqboots.social.wechat.api.auth.data.RefreshAccessTokenRequest;
+import com.yqboots.social.wechat.api.auth.data.*;
 import com.yqboots.social.wechat.api.pay.data.*;
 import com.yqboots.social.wechat.client.WeChatClient;
 import org.springframework.http.HttpEntity;
@@ -41,6 +39,9 @@ public class WeChatClientImpl implements WeChatClient {
         this.objectMapper = objectMapper;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public UnifiedOrderResponse unifiedOrder(UnifiedOrderRequest request) {
         return invoke(request, properties.getPay().getUnifiedOrderUrl());
@@ -57,10 +58,8 @@ public class WeChatClientImpl implements WeChatClient {
         params.put("code", request.getCode());
         params.put("grant_type", request.getGrantType());
 
-        String url = properties.getAuth().getAccessTokenUrl() +
-                "?appid={appid}&secret={secret}&code={code}&grant_type={grant_type}";
         ResponseEntity<String> response = this.restTemplate.getForEntity(
-                url,
+                properties.getAuth().getAccessTokenUrl(),
                 String.class,
                 params
         );
@@ -75,6 +74,9 @@ public class WeChatClientImpl implements WeChatClient {
         return null;
     }
 
+    /**
+     * @inheritDoc
+     */
     @Override
     public GetAccessTokenResponse getRefreshedAccessToken(RefreshAccessTokenRequest request) throws IOException {
         Map<String, Object> params = new HashMap<>();
@@ -82,10 +84,8 @@ public class WeChatClientImpl implements WeChatClient {
         params.put("refreshToken", request.getRefreshToken());
         params.put("grant_type", request.getGrantType());
 
-        String url = properties.getAuth().getRefreshTokenUrl() +
-                "?appid={appid}&refresh_token={refresh_token}&grant_type={grant_type}";
         ResponseEntity<String> response = this.restTemplate.getForEntity(
-                url,
+                properties.getAuth().getRefreshTokenUrl(),
                 String.class,
                 params
         );
@@ -94,6 +94,57 @@ public class WeChatClientImpl implements WeChatClient {
             return objectMapper.readValue(
                     response.getBody().getBytes(StandardCharsets.UTF_8),
                     GetAccessTokenResponse.class
+            );
+        }
+
+        return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public CheckAccessTokenValidResponse getCheckAccessTokenValid(CheckAccessTokenValidRequest request) throws IOException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("access_token", request.getAccessToken());
+        params.put("openid", request.getOpenId());
+
+        ResponseEntity<String> response = this.restTemplate.getForEntity(
+                properties.getAuth().getCheckTokenValidUrl(),
+                String.class,
+                params
+        );
+
+        if (response.getBody() != null) {
+            return objectMapper.readValue(
+                    response.getBody().getBytes(StandardCharsets.UTF_8),
+                    CheckAccessTokenValidResponse.class
+            );
+        }
+
+        return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    public GetUserInfoResponse getCurrentUserInfo(GetUserInfoRequest request) throws IOException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("access_token", request.getAccessToken());
+        params.put("openid", request.getOpenId());
+        params.put("lang", request.getLanguage());
+
+        ResponseEntity<String> response = this.restTemplate.getForEntity(
+                properties.getAuth().getGetUserInfoUrl(),
+                String.class,
+                params
+        );
+
+        if (response.getBody() != null) {
+            return objectMapper.readValue(
+                    response.getBody().getBytes(StandardCharsets.UTF_8),
+                    GetUserInfoResponse.class
             );
         }
 

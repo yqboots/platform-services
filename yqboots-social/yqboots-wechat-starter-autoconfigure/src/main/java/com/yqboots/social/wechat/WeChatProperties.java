@@ -98,5 +98,7 @@ public class WeChatProperties {
     public static class AuthProperties {
         private String accessTokenUrl;
         private String refreshTokenUrl;
+        private String checkTokenValidUrl;
+        private String getUserInfoUrl;
     }
 }
