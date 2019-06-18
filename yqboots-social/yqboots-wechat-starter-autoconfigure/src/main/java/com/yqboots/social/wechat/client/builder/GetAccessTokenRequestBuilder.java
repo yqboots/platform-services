@@ -1,22 +1,22 @@
 package com.yqboots.social.wechat.client.builder;
 
 import com.yqboots.social.wechat.WeChatProperties;
-import com.yqboots.social.wechat.api.auth.data.OpenIdRequest;
+import com.yqboots.social.wechat.api.auth.data.GetAccessTokenRequest;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-public class OpenIdRequestBuilder {
+public class GetAccessTokenRequestBuilder {
     private final WeChatProperties properties;
 
-    public OpenIdRequestBuilder(WeChatProperties properties) {
+    public GetAccessTokenRequestBuilder(WeChatProperties properties) {
         this.properties = properties;
     }
 
-    public OpenIdRequest build(String code) {
-        OpenIdRequest result = new OpenIdRequest();
+    public GetAccessTokenRequest build(String code) {
+        GetAccessTokenRequest result = new GetAccessTokenRequest();
 
         result.setAppId(properties.getAppId());
         result.setAppSecret(properties.getAppSecret());

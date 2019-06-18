@@ -1,7 +1,8 @@
 package com.yqboots.social.wechat.client;
 
-import com.yqboots.social.wechat.api.auth.data.OpenIdRequest;
-import com.yqboots.social.wechat.api.auth.data.OpenIdResponse;
+import com.yqboots.social.wechat.api.auth.data.GetAccessTokenRequest;
+import com.yqboots.social.wechat.api.auth.data.GetAccessTokenResponse;
+import com.yqboots.social.wechat.api.auth.data.RefreshAccessTokenRequest;
 import com.yqboots.social.wechat.api.pay.data.*;
 
 import java.io.IOException;
@@ -16,12 +17,20 @@ public interface WeChatClient {
     UnifiedOrderResponse unifiedOrder(UnifiedOrderRequest request);
 
     /**
-     * Gets open id.
+     * Gets access token.
      *
      * @param request request
-     * @return open id
+     * @return access token & open id
      */
-    OpenIdResponse getOpenID(OpenIdRequest request) throws IOException;
+    GetAccessTokenResponse getAccessToken(GetAccessTokenRequest request) throws IOException;
+
+    /**
+     * Gets refreshed access token
+     *
+     * @param request request
+     * @return access token & open id
+     */
+    GetAccessTokenResponse getRefreshedAccessToken(RefreshAccessTokenRequest request) throws IOException;
 
     /**
      * 申请退款
@@ -54,5 +63,4 @@ public interface WeChatClient {
      * @return 关闭结果
      */
     OrderCloseResponse closeOrder(OrderCloseRequest request);
-
 }

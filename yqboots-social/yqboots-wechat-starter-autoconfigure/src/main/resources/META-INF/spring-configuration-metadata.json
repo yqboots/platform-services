@@ -57,7 +57,13 @@
       "sourceType": "com.yqboots.social.wechat.WeChatProperties#AuthProperties",
       "name": "yqboots.social.wechat.auth.access-token-url",
       "type": "java.lang.String",
-      "description": "Get OpenID URL"
+      "description": "Get Access Token and OpenID URL"
+    },
+    {
+      "sourceType": "com.yqboots.social.wechat.WeChatProperties#AuthProperties",
+      "name": "yqboots.social.wechat.auth.refresh-token-url",
+      "type": "java.lang.String",
+      "description": "Refresh Token URL"
     },
     {
       "sourceType": "com.yqboots.social.wechat.WeChatProperties#PayProperties",

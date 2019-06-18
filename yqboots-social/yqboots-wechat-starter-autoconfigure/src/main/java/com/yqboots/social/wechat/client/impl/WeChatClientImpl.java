@@ -2,8 +2,9 @@ package com.yqboots.social.wechat.client.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yqboots.social.wechat.WeChatProperties;
-import com.yqboots.social.wechat.api.auth.data.OpenIdRequest;
-import com.yqboots.social.wechat.api.auth.data.OpenIdResponse;
+import com.yqboots.social.wechat.api.auth.data.GetAccessTokenRequest;
+import com.yqboots.social.wechat.api.auth.data.GetAccessTokenResponse;
+import com.yqboots.social.wechat.api.auth.data.RefreshAccessTokenRequest;
 import com.yqboots.social.wechat.api.pay.data.*;
 import com.yqboots.social.wechat.client.WeChatClient;
 import org.springframework.http.HttpEntity;
@@ -49,7 +50,7 @@ public class WeChatClientImpl implements WeChatClient {
      * @inheritDoc
      */
     @Override
-    public OpenIdResponse getOpenID(OpenIdRequest request) throws IOException {
+    public GetAccessTokenResponse getAccessToken(GetAccessTokenRequest request) throws IOException {
         Map<String, Object> params = new HashMap<>();
         params.put("appid", request.getAppId());
         params.put("secret", request.getAppSecret());
@@ -67,7 +68,32 @@ public class WeChatClientImpl implements WeChatClient {
         if (response.getBody() != null) {
             return objectMapper.readValue(
                     response.getBody().getBytes(StandardCharsets.UTF_8),
-                    OpenIdResponse.class
+                    GetAccessTokenResponse.class
+            );
+        }
+
+        return null;
+    }
+
+    @Override
+    public GetAccessTokenResponse getRefreshedAccessToken(RefreshAccessTokenRequest request) throws IOException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("appid", request.getAppId());
+        params.put("refreshToken", request.getRefreshToken());
+        params.put("grant_type", request.getGrantType());
+
+        String url = properties.getAuth().getRefreshTokenUrl() +
+                "?appid={appid}&refresh_token={refresh_token}&grant_type={grant_type}";
+        ResponseEntity<String> response = this.restTemplate.getForEntity(
+                url,
+                String.class,
+                params
+        );
+
+        if (response.getBody() != null) {
+            return objectMapper.readValue(
+                    response.getBody().getBytes(StandardCharsets.UTF_8),
+                    GetAccessTokenResponse.class
             );
         }
 

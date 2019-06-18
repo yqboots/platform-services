@@ -1,8 +1,8 @@
 package com.yqboots.social.wechat;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.yqboots.social.wechat.api.auth.data.OpenIdRequest;
-import com.yqboots.social.wechat.api.auth.data.OpenIdResponse;
+import com.yqboots.social.wechat.api.auth.data.GetAccessTokenRequest;
+import com.yqboots.social.wechat.api.auth.data.GetAccessTokenResponse;
 import com.yqboots.social.wechat.api.pay.data.*;
 import com.yqboots.social.wechat.client.WeChatClient;
 import com.yqboots.social.wechat.client.impl.WeChatClientImpl;
@@ -53,7 +53,7 @@ public class WeChatAutoConfiguration {
     private Jaxb2Marshaller jaxb2Marshaller() {
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         marshaller.setClassesToBeBound(
-                OpenIdRequest.class, OpenIdResponse.class,
+                GetAccessTokenRequest.class, GetAccessTokenResponse.class,
                 InitiatePaymentRequest.class,
                 OrderCloseRequest.class, OrderCloseResponse.class,
                 OrderQueryRequest.class, OrderQueryResponse.class,

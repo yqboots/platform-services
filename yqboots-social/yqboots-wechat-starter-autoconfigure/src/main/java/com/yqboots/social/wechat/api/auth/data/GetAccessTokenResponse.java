@@ -7,7 +7,7 @@ import lombok.Data;
  * Open Id for wechat
  */
 @Data
-public class OpenIdResponse {
+public class GetAccessTokenResponse {
     @JsonProperty(value = "access_token")
     private String accessToken;
     @JsonProperty(value = "expires_in")

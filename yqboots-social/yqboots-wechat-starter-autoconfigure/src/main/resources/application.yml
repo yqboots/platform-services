@@ -10,6 +10,7 @@ yqboots:
       test-mode: true
       auth:
         access-token-url: https://api.weixin.qq.com/sns/oauth2/access_token
+        refresh-token-url: https://api.weixin.qq.com/sns/oauth2/refresh_token
       pay:
         cert-path: classpath:META-INF/resources/wxpay/cert/apiclient_cert.p12
         unified-order-url: https://api.mch.weixin.qq.com/pay/unifiedorder
