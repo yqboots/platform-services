@@ -5,10 +5,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -19,4 +17,14 @@ import javax.persistence.Table;
 public class User extends AbstractPersistable<Long> {
     private String username;
     private String password;
+    /**
+     * 当第三方登录时，设置了默认密码，如果使用了用户名/密码登录了，则需要重置密码
+     */
+    @Column(name = "INITIAL_USERNAME_CHANGED")
+    private boolean initialUsernameChanged = false;
+    @Column(name = "INITIAL_PASSWORD_CHANGED")
+    private boolean initialPasswordChanged = false;
+
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<UserProfile> profiles;
 }
