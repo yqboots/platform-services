@@ -1,4 +1,4 @@
-package com.yqboots.core.id;
+package com.yqboots.commerce.core.id;
 
 /**
  * 用于生成唯一标识

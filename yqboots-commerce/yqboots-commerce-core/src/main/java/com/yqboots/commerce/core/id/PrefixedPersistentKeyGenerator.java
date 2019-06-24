@@ -1,5 +1,6 @@
-package com.yqboots.core.id;
+package com.yqboots.commerce.core.id;
 
+import com.yqboots.commerce.core.entity.SequenceRepository;
 import lombok.Setter;
 
 /**
@@ -8,6 +9,10 @@ import lombok.Setter;
 public class PrefixedPersistentKeyGenerator extends PersistentKeyGenerator {
     @Setter
     private String prefix;
+
+    public PrefixedPersistentKeyGenerator(String key, SequenceRepository sequenceRepository) {
+        super(key, sequenceRepository);
+    }
 
     @Override
     public Object generate() {

@@ -9,7 +9,6 @@ import com.yqboots.social.wechat.client.builder.RefreshAccessTokenRequestBuilder
 import com.yqboots.social.wechat.entity.WeChatUserProfile;
 import com.yqboots.social.wechat.service.WeChatAuthService;
 import com.yqboots.social.wechat.service.support.WeChatUserProfileHandler;
-import lombok.Setter;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -25,14 +24,13 @@ public class WeChatAuthServiceImpl implements WeChatAuthService, ApplicationCont
     private ApplicationContext applicationContext;
 
     private final WeChatClient weChatClient;
-
-    @Setter
-    @Autowired
-    private WeChatUserProfileHandler userProfileHandler;
+    private final WeChatUserProfileHandler userProfileHandler;
 
     @Autowired
-    public WeChatAuthServiceImpl(WeChatClient weChatClient) {
+    public WeChatAuthServiceImpl(final WeChatClient weChatClient,
+                                 final WeChatUserProfileHandler userProfileHandler) {
         this.weChatClient = weChatClient;
+        this.userProfileHandler = userProfileHandler;
     }
 
     @Override
@@ -40,8 +38,6 @@ public class WeChatAuthServiceImpl implements WeChatAuthService, ApplicationCont
         GetAccessTokenResponse tokenResponse = getAccessToken(code);
         // store the token in DB
         WeChatUserProfile userProfile = userProfileHandler.storeUserProfile(tokenResponse);
-
-        // TODO: get user info from wechat and store in DB too
 
         // TODO: return current user info to client
     }

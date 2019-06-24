@@ -1,19 +1,33 @@
 package com.yqboots.social.wechat.service.support;
 
+import com.yqboots.commerce.core.id.KeyGenerator;
 import com.yqboots.commerce.user.entity.Customer;
+import com.yqboots.commerce.user.entity.CustomerRepository;
 import com.yqboots.social.wechat.api.auth.data.GetAccessTokenResponse;
 import com.yqboots.social.wechat.entity.WeChatUserProfile;
 import com.yqboots.social.wechat.entity.WeChatUserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-@Component
+import java.time.LocalDateTime;
+
+import static com.yqboots.social.wechat.WeChatBeans.WECHAT_CUSTOMER_NAME_KEY_GENERATOR;
+
+@Service
 public class WeChatUserProfileHandler {
+    private final KeyGenerator keyGenerator;
+    private final CustomerRepository customerRepository;
     private final WeChatUserProfileRepository userProfileRepository;
 
     @Autowired
-    public WeChatUserProfileHandler(WeChatUserProfileRepository userProfileRepository) {
+    public WeChatUserProfileHandler(@Qualifier(value = WECHAT_CUSTOMER_NAME_KEY_GENERATOR) final KeyGenerator keyGenerator,
+                                    final CustomerRepository customerRepository,
+                                    final WeChatUserProfileRepository userProfileRepository) {
+        this.keyGenerator = keyGenerator;
+        this.customerRepository = customerRepository;
         this.userProfileRepository = userProfileRepository;
     }
 
@@ -23,6 +37,7 @@ public class WeChatUserProfileHandler {
      * @param tokenResponse tokenResponse
      * @return wechat user profile with user
      */
+    @Transactional
     public WeChatUserProfile storeUserProfile(GetAccessTokenResponse tokenResponse) {
         WeChatUserProfile result = userProfileRepository.findByUnionId(tokenResponse.getUnionId());
 
@@ -30,6 +45,9 @@ public class WeChatUserProfileHandler {
     }
 
     private WeChatUserProfile createUserProfile(GetAccessTokenResponse tokenResponse) {
+        Customer customer = createCustomerRandomly();
+        customer = customerRepository.save(customer);
+
         WeChatUserProfile result = new WeChatUserProfile();
 
         result.setUnionId(tokenResponse.getUnionId());
@@ -37,17 +55,20 @@ public class WeChatUserProfileHandler {
         result.setAccessToken(tokenResponse.getAccessToken());
         result.setRefreshToken(tokenResponse.getRefreshToken());
         result.setOpenId(tokenResponse.getOpenId());
-        // TODO: calculate the expired time
-        // profile.setTokenExpiredTime();
-        // TODO: create new user or attach to existed user
+        // calculate the expired time
+        result.setTokenExpiredTime(LocalDateTime.now().plusSeconds(Long.parseLong(tokenResponse.getExpiresIn())));
+        // attach to auto created user
+        result.setOwner(customer);
 
         return userProfileRepository.save(result);
     }
 
-    private Customer createUser() {
+    private Customer createCustomerRandomly() {
         Customer result = new Customer();
-        result.setUsername("");
-        result.setPassword("password");
+        result.setUsername((String) keyGenerator.generate());
+        result.setPassword("");
+        result.setInitialPasswordChanged(false);
+        result.setInitialUsernameChanged(false);
 
         return result;
     }

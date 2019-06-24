@@ -15,6 +15,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "users")
 public class User extends AbstractPersistable<Long> {
+    @Column(nullable = false, unique = true, length = 128)
     private String username;
     private String password;
     /**
@@ -25,6 +26,6 @@ public class User extends AbstractPersistable<Long> {
     @Column(name = "INITIAL_PASSWORD_CHANGED")
     private boolean initialPasswordChanged = false;
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<UserProfile> profiles;
 }
