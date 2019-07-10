@@ -13,6 +13,9 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,12 +37,18 @@ public class WeChatAuthServiceImpl implements WeChatAuthService, ApplicationCont
     }
 
     @Override
-    public void login(String code) throws IOException {
+    public GetUserInfoResponse login(String code) throws IOException {
         GetAccessTokenResponse tokenResponse = getAccessToken(code);
         // store the token in DB
         WeChatUserProfile userProfile = userProfileHandler.storeUserProfile(tokenResponse);
 
-        // TODO: return current user info to client
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+                userProfile.getUnionId(), null
+        );
+        token.setDetails(userProfile);
+        SecurityContextHolder.getContext().setAuthentication(token);
+
+        return getCurrentUserInfo();
     }
 
     @Override
@@ -58,7 +67,10 @@ public class WeChatAuthServiceImpl implements WeChatAuthService, ApplicationCont
     @Override
     public GetUserInfoResponse getCurrentUserInfo() throws IOException {
         GetUserInfoRequestBuilder builder = applicationContext.getBean(GetUserInfoRequestBuilder.class);
-        return weChatClient.getCurrentUserInfo(builder.build());
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        WeChatUserProfile profile = (WeChatUserProfile)authentication.getDetails();
+        return weChatClient.getCurrentUserInfo(builder.build(profile.getAccessToken(), profile.getOpenId()));
     }
 
     @Override

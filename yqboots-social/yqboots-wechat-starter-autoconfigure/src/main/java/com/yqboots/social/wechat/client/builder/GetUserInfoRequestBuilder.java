@@ -13,10 +13,10 @@ public class GetUserInfoRequestBuilder {
      *
      * @return request
      */
-    public GetUserInfoRequest build() {
+    public GetUserInfoRequest build(String accessToken, String openId) {
         GetUserInfoRequest result = new GetUserInfoRequest();
-        result.setAccessToken("");
-        result.setOpenId("");
+        result.setAccessToken(accessToken);
+        result.setOpenId(openId);
         result.setLanguage("zh_CN");
 
         return result;

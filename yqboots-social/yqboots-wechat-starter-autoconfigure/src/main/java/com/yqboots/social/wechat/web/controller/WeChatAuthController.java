@@ -1,6 +1,6 @@
 package com.yqboots.social.wechat.web.controller;
 
-import com.yqboots.social.wechat.api.auth.data.GetAccessTokenResponse;
+import com.yqboots.social.wechat.api.auth.data.GetUserInfoResponse;
 import com.yqboots.social.wechat.service.WeChatAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -19,8 +19,8 @@ public class WeChatAuthController {
             value = {"/{code}"},
             produces = {MediaType.APPLICATION_JSON_UTF8_VALUE}
     )
-    public GetAccessTokenResponse login(@PathVariable String code) throws IOException {
-        return weChatAuthService.getAccessToken(code);
+    public GetUserInfoResponse login(@PathVariable String code) throws IOException {
+        return weChatAuthService.login(code);
     }
 
     @Autowired

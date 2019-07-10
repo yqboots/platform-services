@@ -12,7 +12,7 @@ public interface WeChatAuthService {
      * @param code code
      * @throws IOException if can not parse the response string to object
      */
-    void login(String code) throws IOException;
+    GetUserInfoResponse login(String code) throws IOException;
 
     GetAccessTokenResponse getAccessToken(String code) throws IOException;
 
