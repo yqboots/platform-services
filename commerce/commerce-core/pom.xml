@@ -4,10 +4,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.yqboots.commerce</groupId>
-    <artifactId>yqboots-commerce</artifactId>
+    <artifactId>commerce</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <artifactId>yqboots-commerce-core</artifactId>
+  <artifactId>commerce-core</artifactId>
 
   <dependencies>
     <dependency>

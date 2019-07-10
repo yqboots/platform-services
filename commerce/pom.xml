@@ -9,7 +9,7 @@
     <relativePath/>
   </parent>
   <groupId>com.yqboots.commerce</groupId>
-  <artifactId>yqboots-commerce</artifactId>
+  <artifactId>commerce</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
@@ -22,8 +22,8 @@
   </properties>
 
   <modules>
-    <module>yqboots-commerce-core</module>
-    <module>yqboots-order-fulfillment</module>
+    <module>commerce-core</module>
+    <module>order-fulfillment</module>
   </modules>
 
   <dependencyManagement>

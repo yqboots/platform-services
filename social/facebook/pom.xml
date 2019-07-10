@@ -4,10 +4,10 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.yqboots.social</groupId>
-    <artifactId>yqboots-social</artifactId>
+    <artifactId>social</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
-  <artifactId>yqboots-facebook-starter-autoconfigure</artifactId>
+  <artifactId>facebook</artifactId>
 
   <dependencies>
     <dependency>

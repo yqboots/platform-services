@@ -22,8 +22,8 @@
   </properties>
 
   <modules>
-    <module>yqboots-commerce</module>
-    <module>yqboots-social</module>
+    <module>commerce</module>
+    <module>social</module>
   </modules>
 
   <dependencyManagement>

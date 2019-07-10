@@ -9,7 +9,7 @@
     <relativePath/>
   </parent>
   <groupId>com.yqboots.social</groupId>
-  <artifactId>yqboots-social</artifactId>
+  <artifactId>social</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
@@ -20,9 +20,9 @@
   </properties>
 
   <modules>
-    <module>yqboots-wechat-starter-autoconfigure</module>
-    <module>yqboots-facebook-starter-autoconfigure</module>
-    <module>yqboots-github-starter-autoconfigure</module>
+    <module>wechat</module>
+    <module>facebook</module>
+    <module>github</module>
   </modules>
 
   <dependencyManagement>
